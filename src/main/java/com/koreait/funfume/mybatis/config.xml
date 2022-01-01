@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.koreait.funfume.domain.Product" alias="Product"/>
+		<typeAlias type="com.koreait.funfume.domain.ProductImg" alias="ProductImg"/>
+		<typeAlias type="com.koreait.funfume.domain.Category" alias="Category"/>
+		<typeAlias type="com.koreait.funfume.domain.Note" alias="Note"/>
+	</typeAliases>
+			
+  <mappers>
+    <mapper resource="com/koreait/funfume/mybatis/ProductMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/ProductImgMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/CategoryMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/NoteMapper.xml"/>
+  </mappers>
+  
+</configuration>

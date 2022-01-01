@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Category">
+
+	<!-- 답변게시판의 원리와 동일, 동물 올림픽 -->
+	<select id="selectAll" resultType="Category">
+		select * from category order by team desc,step asc
+	</select>
+	
+	<!-- 게시물 한건 -->
+	<select id="select" parameterType="int" resultType="Category">
+		select * from category where category_id=#{category_id}
+	</select>
+	
+	
+	<!-- 원글 처리 -->
+	<insert id="insert" parameterType="Category">
+		insert into category(category_name) values(#{category_name})
+		
+		<!-- dto만 수정 -->
+		<selectKey order="AFTER" keyColumn="category_id" resultType="int" keyProperty="team">
+			select last_insert_id() as category_id
+		</selectKey>
+	</insert>
+	
+	<!-- 원글 등록 후 team의 값을 category_id와 일치시키기 위함 -->
+	<update id="updateTeam" parameterType="int">
+		update category set team=#{team} where category_id=#{team}
+	</update>
+	
+	<!-- 서브 카테고리(답변글) 답변글 등록을 위한 자리확보 -->
+	<update id="updateStep" parameterType="Category">
+		
+		<selectKey order="BEFORE" keyColumn="step" resultType="int" keyProperty="step">
+			<![CDATA[
+				select ifnull(max(step),#{step}) as step from category
+				where team= #{team} and depth=#{depth}+1
+				and step > #{step}
+			]]>
+		</selectKey>
+		<![CDATA[
+		update category set step=step+1 where team=#{team} and step > #{step}
+		]]>
+	</update>
+	
+	<insert id="insertSub" parameterType="Category">
+		insert into category(category_name,team,step,depth)
+		values(#{category_name}, #{team}, #{step}+1, #{depth}+1)
+	</insert>
+	
+	
+	
+</mapper>
+
+
+
+
+
