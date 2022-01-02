@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	
+	<!-- 스프링 데이터베이스 연동 관련(커넥션 취득) -->
+	<jee:jndi-lookup 
+	id="dataSource" 
+	resource-ref="true"
+	jndi-name="java:comp/env/jdbc/mysql"/>
+	
+	<!-- 사용하려는 persistence 관련 기술(Mybatis,jdbc,hibernate, JSA...)에 따라 -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
+	id="transactionManager" 
+	p:dataSource-ref="dataSource"></bean>
+	
+	<!-- mybatis spring 을 사용하는 경우 sqlsessionfactorybean 등록 -->
+	<bean id = "sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean"
+	p:dataSource-ref="dataSource"
+	p:configLocation= "classpath:com/koreait/funfume/mybatis/config.xml"/>
+	
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id ="sqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryBean"></constructor-arg>
+	</bean>
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	
+	<!-- 웹사이트에서 공통으로 사용할 빈들을 여기에 하자 @service..emdemd -->
+	<context:component-scan base-package="com.koreait.funfume.model"></context:component-scan>
+</beans>
