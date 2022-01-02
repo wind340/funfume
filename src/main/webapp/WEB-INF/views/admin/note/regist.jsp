@@ -1,4 +1,9 @@
+<%@page import="com.koreait.funfume.domain.NoteType"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%
+	List<NoteType> noteTypeList = (List)request.getAttribute("noteTypeList");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +13,6 @@
 	
 	<%@ include file="../../admin_inc/head_link.jsp" %>
 	
-  <!-- CodeMirror -->
-  <link rel="stylesheet" href="/resources/admin/plugins/codemirror/codemirror.css">
-  <link rel="stylesheet" href="/resources/admin/plugins/codemirror/theme/monokai.css">	
-  
-  <!-- summernote -->
-  <link rel="stylesheet" href="/resources/admin/plugins/summernote/summernote-bs4.min.css">
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -56,17 +54,53 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-12">
+
+        <!--  Note Type begin-->
+		<div class="col-3">
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">타입 목록</h3>
+               </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table table-hover" >
+                  <tbody align="center">
+                    <% for(NoteType noteType : noteTypeList){ %>
+                    <tr data-widget="expandable-table" aria-expanded="true">
+                   		<td>
+							<a href="javascript:selType('<%=noteType.getNote_type_name() %>',<%=noteType.getNote_type_id()%>)">
+							<%=noteType.getNote_type_name() %></a>
+					<%} %>
+						</td>
+                   </tbody> 
+				<tfoot>
+					<td align="center">
+       					<button type="button" class="btn btn-danger" onClick="location.href='/admin/note/type/registForm';">노트 타입 등록</button>
+					</td>
+				</tfoot>
+				</table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        	
+        
+        <!-- Note Regist Form  begin-->
+          <div class="col-9">
             <div class="card card-warning">
               <div class="card-header">
                 <h3 class="card-title">INPUT</h3>
               </div>
               <!-- /.card-header -->
-              <!-- form start -->
               <form name ="form">
                 <div class="card-body">
                 
-                  
+                  <div class="form-group">
+	                  <select class="form-control" id="note_type_id" name="noteType.note_type_id">
+	                  		<option>좌측 타입을 선택해 주세요</option>
+	                  </select>
+				  </div>
                   <div class="form-group">
                     <input type="text" class="form-control"  placeholder="노트명 입력" name="note_name">
                   </div>
@@ -89,26 +123,26 @@
                 </div>
               </form>
             </div>
+            </div>
             <!-- /.card -->
           </div>
         </div>
         
         <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
+	    </section>
+      </div>
+      <!-- /.container-fluid -->
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
   
   <%@ include file="../../admin_inc/footer.jsp" %>  
-  
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
 <!-- ./wrapper -->
 
 <%@ include file="../../admin_inc/bottom_link.jsp" %>
@@ -131,6 +165,12 @@ $(function () {
     	regist();
     });
   })
+//선택한 타입 반영하기
+function selType(note_type_name, note_type_id){
+	var sel = document.querySelector("#note_type_id");
+	sel.options[0].text=note_type_name;//사용자가 보게될 옵션의 제목
+	sel.options[0].value=note_type_id;//사용자가 보게될 옵션의 값
+}
   
 function regist(){
 	 $("form[name='form']").attr({
@@ -152,7 +192,6 @@ function preview(obj){
 	  }
   }
  
-//자바스크립트도 stream이 지원된다..
 </script>
 
 </body>

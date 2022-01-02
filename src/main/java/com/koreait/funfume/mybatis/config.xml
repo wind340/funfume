@@ -8,6 +8,7 @@
 		<typeAlias type="com.koreait.funfume.domain.ProductImg" alias="ProductImg"/>
 		<typeAlias type="com.koreait.funfume.domain.Category" alias="Category"/>
 		<typeAlias type="com.koreait.funfume.domain.Note" alias="Note"/>
+		<typeAlias type="com.koreait.funfume.domain.NoteType" alias="NoteType"/>
 	</typeAliases>
 			
   <mappers>
@@ -15,6 +16,7 @@
     <mapper resource="com/koreait/funfume/mybatis/ProductImgMapper.xml"/>
     <mapper resource="com/koreait/funfume/mybatis/CategoryMapper.xml"/>
     <mapper resource="com/koreait/funfume/mybatis/NoteMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/NoteTypeMapper.xml"/>
   </mappers>
   
 </configuration>

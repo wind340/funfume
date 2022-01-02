@@ -23,7 +23,8 @@ public class NoteServiceImpl implements NoteService{
 	public Note select(int note_id) {
 		return noteDAO.select(note_id);
 	}
-
+	
+	//
 	@Override
 	public void insert(Note note) throws NoteException{
 		noteDAO.insert(note);
@@ -37,6 +38,11 @@ public class NoteServiceImpl implements NoteService{
 	@Override
 	public void delete(int note_id) throws NoteException{
 		noteDAO.delete(note_id);
+	}
+
+	@Override
+	public List selectAllByNoteType(int noteType) {
+		return noteDAO.selectAllByNoteType(noteType);
 	}
 	
 	

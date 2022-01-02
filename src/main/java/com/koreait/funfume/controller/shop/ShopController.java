@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.koreait.funfume.controller.shop;
 
 import org.springframework.beans.factory.annotation.Autowired;

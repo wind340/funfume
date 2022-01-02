@@ -1,7 +1,9 @@
+<%@page import="com.koreait.funfume.domain.NoteType"%>
 <%@page import="com.koreait.funfume.domain.Note"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	Note note = (Note)request.getAttribute("note");
+	NoteType noteType = (NoteType)request.getAttribute("noteType");
 %>
 
 <!DOCTYPE html>
@@ -13,13 +15,6 @@
 	
 	<%@ include file="../../admin_inc/head_link.jsp" %>
 	
-  <!-- CodeMirror -->
-  <link rel="stylesheet" href="/resources/admin/plugins/codemirror/codemirror.css">
-  <link rel="stylesheet" href="/resources/admin/plugins/codemirror/theme/monokai.css">	
-  
-  <!-- summernote -->
-  <link rel="stylesheet" href="/resources/admin/plugins/summernote/summernote-bs4.min.css">
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -55,13 +50,14 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-12">
+          <div class="col-9">
+          
+          
             <div class="card card-warning">
               <div class="card-header">
                 <h3 class="card-title">Detail</h3>
@@ -73,8 +69,9 @@
                   <div class="form-group">
                    	<input type="hidden" name="note_id" value="<%=note.getNote_id()%>">
 	               	<input type="hidden" name="note_img" value="<%=note.getNote_img()%>">
-	                  
-                    <input type="text" class="form-control"  value="<%= note.getNote_name() %>" name="note_name">
+               	
+                   <%--  <input type="text" class="form-control" name="note_type_name" value="<%=note.getNoteType().getNote_type_name()%>" > --%>
+                    <input type="text" class="form-control" name="note_name" value="<%= note.getNote_name() %>" >
                   </div>
                                    	  
                   <div class="form-group">
@@ -85,7 +82,7 @@
                   </div>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="noteFile">
+                        <input type="file" class="custom-file-input" name="noteFile" value="#">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
                     </div>
@@ -94,6 +91,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
+                
                   <button type="button" class="btn btn-warning" id="bt_edit">수정</button>
                   <button type="button" class="btn btn-warning" id="bt_del">삭제</button>
                   <button type="button" class="btn btn-warning" onClick="location.href='/admin/note/list';">목록</button>
@@ -144,14 +142,15 @@
   })
 
 function preview(obj){
-	  for(var i=0; i<obj.files.length;i++){
+	  
 		  var reader = new FileReader();
 		  reader.onload=function(e){
 			  
 			  $("#preview").append($("<img src='"+e.target.result+"' width='400px'>"));
+			  
 		  }
-		  reader.readAsDataURL(obj.files[i]);
-	  }
+		  reader.readAsDataURL(obj.files[0]);
+	  
   }
 
 

@@ -49,4 +49,9 @@ public class MybatisNoteDAO implements NoteDAO{
 		}
 	}
 
+	@Override
+	public List selectAllByNoteType(int note_type_id) {
+		return sessionTemplate.selectList("Note.selectAllByNoteType", note_type_id);
+	}
+
 }

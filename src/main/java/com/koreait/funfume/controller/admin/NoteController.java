@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.funfume.domain.Note;
+import com.koreait.funfume.domain.NoteType;
 import com.koreait.funfume.exception.NoteException;
 import com.koreait.funfume.model.note.NoteService;
+import com.koreait.funfume.model.notetype.NoteTypeService;
 import com.koreait.funfume.util.FileManager;
 import com.koreait.funfume.util.Pager;
 
@@ -32,26 +34,35 @@ public class NoteController {
 	@Autowired
 	private NoteService noteService;
 	
+	@Autowired
+	private NoteTypeService noteTypeService;
+	
 	//노트 목록 요청
 	@GetMapping("/note/list")
 	public String getList(HttpServletRequest request, Model model) {
 		List<Note> noteList = noteService.selectAll();
+		List<NoteType> noteTypeList=noteTypeService.selectAll();
 		pager.init(noteList, request);
 		model.addAttribute("noteList", noteList);
+		model.addAttribute("noteTypeList", noteTypeList);
 		model.addAttribute("pager", pager);
 		return "admin/note/list";
 	}
 	
 	//노트 등록 폼 요청
 	@GetMapping("/note/registForm")
-	public String registForm() {
+	public String registForm(Model model) {
+		//노트타입 불러오기
+		List<NoteType> noteTypeList=noteTypeService.selectAll();
+		model.addAttribute("noteTypeList", noteTypeList);
+	
 		return "admin/note/regist";
 	}
 	
 	//노트 등록
 	@PostMapping("/note/regist")
 	public String regist(HttpServletRequest request, Note note) {
-		//3단계
+		//3단계	
 		String filename = fileManager.saveAsFile(request, note);
 		note.setNote_img(filename);
 		noteService.insert(note);
@@ -73,7 +84,6 @@ public class NoteController {
 	public ModelAndView update(HttpServletRequest request, Note note) {
 		String filename = fileManager.saveAsFile(request, note);
 		note.setNote_img(filename);
-		
 		noteService.update(note);
 
 		ModelAndView mav = new ModelAndView("redirect:/admin/note/detail?note_id="+note.getNote_id());
