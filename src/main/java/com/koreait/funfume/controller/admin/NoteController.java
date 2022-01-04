@@ -49,24 +49,38 @@ public class NoteController {
 		return "admin/note/list";
 	}
 	
+	//노트목록 타입선택시 요청
+	@GetMapping("/note/selectType")
+	public String getSelectType(HttpServletRequest request, Model model, int note_type_id) {
+		List<Note> selectType =noteService.selectType(note_type_id);
+		List<NoteType> noteTypeList=noteTypeService.selectAll();
+		pager.init(selectType, request);
+		model.addAttribute("noteTypeList", noteTypeList);
+		model.addAttribute("selectType", selectType);
+		model.addAttribute("pager", pager);
+		return "admin/note/selectType";
+	}
+	
+	
 	//노트 등록 폼 요청
 	@GetMapping("/note/registForm")
 	public String registForm(Model model) {
 		//노트타입 불러오기
 		List<NoteType> noteTypeList=noteTypeService.selectAll();
 		model.addAttribute("noteTypeList", noteTypeList);
-	
 		return "admin/note/regist";
 	}
 	
 	//노트 등록
 	@PostMapping("/note/regist")
 	public String regist(HttpServletRequest request, Note note) {
-		//3단계	
-		String filename = fileManager.saveAsFile(request, note);
-		note.setNote_img(filename);
+		//넘어온 파일객체의 length를 구해서 조건문으로 저장 판단 
+		int checkFile=note.getNoteFile().getOriginalFilename().length();
+		if(checkFile>0) {
+			String filename = fileManager.saveAsFile(request, note);
+			note.setNote_img(filename);
+		}
 		noteService.insert(note);
-		
 		return "redirect:/admin/note/list";
 	}
 	
@@ -75,6 +89,8 @@ public class NoteController {
 	public String getDetail(int note_id, Model model) {
 		Note note = noteService.select(note_id);
 		model.addAttribute("note", note);
+		List<NoteType> noteTypeList=noteTypeService.selectAll();
+		model.addAttribute("noteTypeList", noteTypeList);
 		return "admin/note/detail";
 	}
 	
@@ -82,10 +98,14 @@ public class NoteController {
 	//노트 수정
 	@PostMapping("/note/update")
 	public ModelAndView update(HttpServletRequest request, Note note) {
-		String filename = fileManager.saveAsFile(request, note);
-		note.setNote_img(filename);
+		System.out.println(note.getNoteFile().getOriginalFilename());
+		int checkFile=note.getNoteFile().getOriginalFilename().length();
+		if(checkFile>0) {
+			String filename = fileManager.saveAsFile(request, note);
+			note.setNote_img(filename);	
+		}
 		noteService.update(note);
-
+		
 		ModelAndView mav = new ModelAndView("redirect:/admin/note/detail?note_id="+note.getNote_id());
 		return mav;
 	}
@@ -100,7 +120,7 @@ public class NoteController {
 	
 	@ExceptionHandler(NoteException.class)
 	public ModelAndView handle(NoteException e) {
-		ModelAndView mav = new ModelAndView("error");
+		ModelAndView mav = new ModelAndView("admin/error/result");
 		mav.addObject("e", e);
 		return mav;
 	}

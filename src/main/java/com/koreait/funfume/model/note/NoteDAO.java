@@ -6,7 +6,7 @@ import com.koreait.funfume.domain.Note;
 
 public interface NoteDAO {
 	public List selectAll();
-	public List selectAllByNoteType(int note_type_id);
+	public List selectType(int note_type_id);
 	public Note select(int note_id);
 	public void insert(Note note);
 	public void update(Note note);

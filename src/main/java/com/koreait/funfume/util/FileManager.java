@@ -16,7 +16,6 @@ import com.koreait.funfume.exception.UploadException;
 //파일 처리와 관련된 다양한 업무를 처리해주는 전담자 클래스
 public class FileManager {
 	//파일 저장(웹으로 전달된...)
-
 	
 	//다중 파일 업로드 처리
 	public static String[] saveMultiFile(HttpServletRequest request,Product product) throws UploadException{
@@ -56,6 +55,8 @@ public class FileManager {
 	public static String saveAsFile(HttpServletRequest request, Note note)throws UploadException {
 		boolean result = false;
 		MultipartFile multi= note.getNoteFile();
+		
+		
 		String filename =null;
 		System.out.println("getName():" + multi.getName()); //html name
 		System.out.println("getFilename():" + multi.getOriginalFilename());
@@ -81,6 +82,7 @@ public class FileManager {
 		if(result==false) {
 			throw new UploadException("업로드 실패");
 		}
+		
 		return filename;
 	}
 	

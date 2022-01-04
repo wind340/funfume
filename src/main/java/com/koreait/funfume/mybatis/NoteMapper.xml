@@ -9,21 +9,33 @@
 		<association column="note_type_id" property="noteType" javaType="NoteType" select="NoteType.select" />		
 	</resultMap>
 	
-	<sql id="selectAllCommon">
+	<!-- 노트+타입 전체 -->
+	<sql id="selectAllNote">
 		select note_id, note_name , note_img,
 		t.note_type_id as note_type_id, note_type_name
 		from note_type t, note n
 		where t.note_type_id=n.note_type_id
 	</sql>
-
+	
+	<!-- 노트 목록가져오기 -->
 	<select id="selectAll" resultMap="JoinNoteTypeNote">
-		<include refid="selectAllCommon"/>
-	</select>
-
-	<select id="select" parameterType="int" resultType="Note">
-		select * from note where note_id=#{note_id}
+		<include refid="selectAllNote"/>
+		order by note_id desc
 	</select>
 	
+	<!-- 노트 한건 가져오기 -->
+	<select id="select" parameterType="int" resultMap="JoinNoteTypeNote">
+		<include refid="selectAllNote"/>
+		and note_id=#{note_id}
+	</select>
+	
+	<!-- 선택한 노트타입만 가져오기 -->
+	<select id="selectType" parameterType="int" resultMap="JoinNoteTypeNote">
+		<include refid="selectAllNote"/>
+		and n.note_type_id=#{note_type_id}
+	</select>
+	
+	<!-- 노트 등록 -->
 	<insert id="insert" parameterType="Note">
 		insert into note(note_type_id, note_name, note_img) values(#{noteType.note_type_id}, #{note_name}, #{note_img})
 	</insert>

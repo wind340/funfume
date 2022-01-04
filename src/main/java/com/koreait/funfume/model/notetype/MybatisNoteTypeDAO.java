@@ -43,7 +43,7 @@ public class MybatisNoteTypeDAO implements NoteTypeDAO {
 	}
 
 	@Override
-	public void delete(int note_type_id) {
+	public void delete(int note_type_id) throws NoteTypeException{
 		int result = sessionTemplate.delete("NoteType.delete", note_type_id);
 		if(result==0) {
 			throw new NoteTypeException("타입삭제 실패");

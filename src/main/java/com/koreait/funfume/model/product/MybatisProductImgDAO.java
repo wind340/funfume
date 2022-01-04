@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.koreait.funfume.model.product;
 
 import org.mybatis.spring.SqlSessionTemplate;

@@ -14,6 +14,8 @@
 	<%@ include file="../../admin_inc/head_link.jsp" %>
 	
 </head>
+
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -93,7 +95,7 @@
                 <h3 class="card-title">INPUT</h3>
               </div>
               <!-- /.card-header -->
-              <form name ="form">
+              <form name ="form1">
                 <div class="card-body">
                 
                   <div class="form-group">
@@ -106,7 +108,7 @@
                   </div>
                                    	  
                   <div class="form-group">
-                  <div id="preview"></div>
+                  <div id="preview">
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" multiple name="noteFile">
@@ -116,7 +118,6 @@
                   </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                   <button type="button" class="btn btn-warning" id="bt_regist">등록</button>
                   <button type="button" class="btn btn-warning" onClick="history.back()">목록</button>
@@ -173,25 +174,29 @@ function selType(note_type_name, note_type_id){
 }
   
 function regist(){
-	 $("form[name='form']").attr({
+	 $("form[name='form1']").attr({
 		action: "/admin/note/regist",
 		method: "post",
 		enctype: "multipart/form-data"
 	 });
-	 $("form[name='form']").submit();
+	 $("form[name='form1']").submit();
   }
-  
-//제이쿼리로도 처리해본다
+
+
 function preview(obj){
 	  for(var i=0; i<obj.files.length;i++){
 		  var reader = new FileReader();
 		  reader.onload=function(e){
-			  $("#preview").append($("<img src='"+e.target.result+"' width='400px'>"));
+			 $("#preview").append($("<div id='imgsource'><img src='"+e.target.result+"' width='400px'><div onClick='delImg()'>X</div></div>"));
 		  }
 		  reader.readAsDataURL(obj.files[i]);
 	  }
-  }
- 
+}
+
+function delImg(){
+	$("#imgsource").remove(); 
+	document.querySelector("form[name='form1']").reset();
+}
 </script>
 
 </body>

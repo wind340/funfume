@@ -7,7 +7,7 @@ import com.koreait.funfume.domain.Note;
 public interface NoteService {
 	
 	public List selectAll();
-	public List selectAllByNoteType(int noteType);
+	public List selectType(int noteType);
 	public Note select(int note_id);
 	public void insert(Note note);
 	public void update(Note note);

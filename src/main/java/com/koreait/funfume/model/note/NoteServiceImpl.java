@@ -41,9 +41,9 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
-	public List selectAllByNoteType(int noteType) {
-		return noteDAO.selectAllByNoteType(noteType);
+	public List selectType(int note_type_id) {
+		return noteDAO.selectType(note_type_id);
 	}
-	
+
 	
 }

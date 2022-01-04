@@ -1,9 +1,10 @@
 <%@page import="com.koreait.funfume.domain.NoteType"%>
+<%@page import="java.util.List"%>
 <%@page import="com.koreait.funfume.domain.Note"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	Note note = (Note)request.getAttribute("note");
-	NoteType noteType = (NoteType)request.getAttribute("noteType");
+	List<NoteType> noteTypeList = (List)request.getAttribute("noteTypeList");
 %>
 
 <!DOCTYPE html>
@@ -55,22 +56,58 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-9">
-          
-          
+
+       <!--  Note Type begin-->
+ 		<div class="col-3">
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">타입 목록</h3>
+               </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table table-hover" >
+                  <tbody align="center">
+                    <% for(NoteType noteType : noteTypeList){ %>
+                    <tr data-widget="expandable-table" aria-expanded="true">
+                   		<td>
+							<a href="javascript:selType('<%=noteType.getNote_type_name() %>',<%=noteType.getNote_type_id()%>)">
+							<%=noteType.getNote_type_name() %></a>
+					<%} %>
+						</td>
+                   </tbody> 
+				<tfoot>
+					<td align="center">
+       					<button type="button" class="btn btn-danger" onClick="location.href='/admin/note/type/registForm';">노트 타입 등록</button>
+					</td>
+				</tfoot>
+				</table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+
+		<!-- 노트 목록  요청 -->
+         <div class="col-9">
             <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title">Detail</h3>
+                <h3 class="card-title">노트 수정</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form name ="form">
+              <form name ="form1">
                 <div class="card-body">
                   <div class="form-group">
                    	<input type="hidden" name="note_id" value="<%=note.getNote_id()%>">
 	               	<input type="hidden" name="note_img" value="<%=note.getNote_img()%>">
-               	
-                   <%--  <input type="text" class="form-control" name="note_type_name" value="<%=note.getNoteType().getNote_type_name()%>" > --%>
+      				
+      				기존 타입
+	                  <select class="form-control" id="note_type_id" name="noteType.note_type_id">
+	                  		<option value="<%=note.getNoteType().getNote_type_id()%>"><%=note.getNoteType().getNote_type_name()%></option>
+	                  </select>
+					</div>
+				
+					<div class="form-group">
                     <input type="text" class="form-control" name="note_name" value="<%= note.getNote_name() %>" >
                   </div>
                                    	  
@@ -82,7 +119,7 @@
                   </div>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="noteFile" value="#">
+                        <input type="file" class="custom-file-input" name="noteFile">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
                     </div>
@@ -127,39 +164,51 @@
 
 <script>
 
- $(function () {
-    //이미지 미리보기 버튼 이벤트
-  $("input[name='noteFile']").change(function(){
-    	preview(this);
-    });  
+$(function () {
+   //이미지 미리보기 버튼 이벤트
+ $("input[name='noteFile']").change(function(){
+   	preview(this);
+   });  
+   
+   $("#bt_edit").click(function(){
+   	edit();
+   });
+   $("#bt_del").click(function(){
+   	del();
+   });
+ })
 
-    $("#bt_edit").click(function(){
-    	edit();
-    });
-    $("#bt_del").click(function(){
-    	del();
-    });
-  })
-
+//미리보기 코드
 function preview(obj){
-	  
+	  for(var i=0; i<obj.files.length;i++){
 		  var reader = new FileReader();
 		  reader.onload=function(e){
-			  
-			  $("#preview").append($("<img src='"+e.target.result+"' width='400px'>"));
-			  
+			 $("#preview").append($("<div id='imgsource'><img src='"+e.target.result+"' width='400px'><div onClick='delImg()'>X</div></div>"));
 		  }
-		  reader.readAsDataURL(obj.files[0]);
-	  
-  }
+		  reader.readAsDataURL(obj.files[i]);
+	  }
+}
 
+function delImg(){
+	$("#imgsource").remove(); 
+	document.querySelector("form[name='form1']").reset();
+}
 
+ //타입 선택시 옵션 저장
+function selType(note_type_name, note_type_id){
+		var sel = document.querySelector("#note_type_id");
+		sel.options[0].text=note_type_name;//사용자가 보게될 옵션의 제목
+		sel.options[0].value=note_type_id;//사용자가 보게될 옵션의 값
+}
+
+ 
+ 
 function edit(){
 	if(confirm("수정하시겠습니까?")){
-		form.action="/admin/note/update";
-		form.method="post";
-		form.encoding="multipart/form-data";
-		form.submit();
+		form1.action="/admin/note/update";
+		form1.method="post";
+		form1.encoding="multipart/form-data";
+		form1.submit();
 	}
 }
  

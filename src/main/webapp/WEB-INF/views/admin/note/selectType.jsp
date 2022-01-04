@@ -5,10 +5,9 @@
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
-	List<Note> noteList = (List)request.getAttribute("noteList");//상품목록
 	Pager pager = (Pager)request.getAttribute("pager"); //페이징 처리객체
 	List<NoteType> noteTypeList = (List)request.getAttribute("noteTypeList");
-
+	List<Note> selectType= (List)request.getAttribute("selectType");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +114,7 @@
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
-                  <thead>
+                                    <thead>
                     <tr>
                       <th>No</th>
                       <th>Type</th>
@@ -128,14 +127,14 @@
 	                  	<%int num=pager.getNum(); %>
 	                    <%for(int i=1;i<=pager.getPageSize();i++){ %>
 	                    <%if(num<1)break;%>
-	                    <%Note note = noteList.get(curPos++); %>
+	                    <%Note selType = selectType.get(curPos++); %>
                     <tr>
                       <td><%=num--%></td>
-                      <td><a href="/admin/note/detail?note_id=<%=note.getNote_id()%>"> <%=note.getNoteType().getNote_type_name() %></a></td>
-                      <td><a href="/admin/note/detail?note_id=<%=note.getNote_id()%>"><%=note.getNote_name() %></a></td>
-                      <td><a href="/admin/note/detail?note_id=<%=note.getNote_id()%>">
-                      <%if(note.getNote_img()!= null) {%>
-                      		<img src="/resources/data/<%=note.getNote_img() %>" width="100px">
+                      <td><a href="/admin/note/detail?note_id=<%=selType.getNote_id()%>"> <%=selType.getNoteType().getNote_type_name() %></a></td>
+                      <td><a href="/admin/note/detail?note_id=<%=selType.getNote_id()%>"><%=selType.getNote_name() %></a></td>
+                      <td><a href="/admin/note/detail?note_id=<%=selType.getNote_id()%>">
+                      <%if(selType.getNote_img()!= null) {%>
+                      		<img src="/resources/data/<%=selType.getNote_img() %>" width="40px">
                       <%} %>
                       </a></td>
 	                    
@@ -160,11 +159,13 @@
 					             			<%} else{ %>
 								<a href="/admin/note/list.jsp?currentPage=<%=pager.getLastPage()+1%>">다음페이지</a>
 					             			<%} %> --%>
-             			</td>
-					</tfoot>
+						</td>
+                   </tbody> 
+                    <tr>
 				</table>
           		<div align="center">
        				<button type="button" class="btn btn-warning" onClick="location.href='/admin/note/registForm';">노트등록</button>
+       				<button type="button" class="btn btn-warning" onClick="location.href='/admin/note/list';">전체목록</button>
 				</div>
 					
               </div>
@@ -193,12 +194,12 @@
 <!-- ./wrapper -->
 
 <%@ include file="../../admin_inc/bottom_link.jsp" %>
-<script>
 
+
+<script>
 function searchType(n){
 	location.href="/admin/note/selectType?note_type_id="+n;
 }
-
 </script>
 </body>
 </html>

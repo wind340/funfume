@@ -33,5 +33,6 @@
 	
 	
 	<!-- 웹사이트에서 공통으로 사용할 빈들을 여기에 하자 @service..emdemd -->
-	<context:component-scan base-package="com.koreait.funfume.model"></context:component-scan>
+	<context:component-scan base-package="com.koreait.funfume.model"/>
+	<context:component-scan base-package="com.koreait.funfume.exception"/>
 </beans>
