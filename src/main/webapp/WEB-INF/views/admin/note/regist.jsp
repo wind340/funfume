@@ -99,8 +99,8 @@
                 <div class="card-body">
                 
                   <div class="form-group">
-	                  <select class="form-control" id="note_type_id" name="noteType.note_type_id">
-	                  		<option>좌측 타입을 선택해 주세요</option>
+	                  <select class="form-control" id="note_type_id" name="noteType.note_type_id" required>
+	                  		<option value="0" selected>좌측타입선택</option>
 	                  </select>
 				  </div>
                   <div class="form-group">
@@ -151,12 +151,12 @@
 <script src="/resources/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
 <script>
+//파일
 $(function () {
   bsCustomFileInput.init();
 });
-</script>
-<script>
-  $(function () {
+
+$(function () {
     //이미지 미리보기 버튼 이벤트
   $("input[name='noteFile']").change(function(){
     	preview(this);
@@ -168,12 +168,29 @@ $(function () {
   })
 //선택한 타입 반영하기
 function selType(note_type_name, note_type_id){
-	var sel = document.querySelector("#note_type_id");
-	sel.options[0].text=note_type_name;//사용자가 보게될 옵션의 제목
-	sel.options[0].value=note_type_id;//사용자가 보게될 옵션의 값
+	
+		var sel = document.querySelector("#note_type_id");
+		sel.options[0].text=note_type_name;//사용자가 보게될 옵션의 제목
+		sel.options[0].value=note_type_id;//사용자가 보게될 옵션의 값
+
 }
   
 function regist(){
+	//유효성 체크 
+	if($("#note_type_id").val()==0){
+		alert("타입 선택은 필수입니다");
+		return;
+	}
+	
+	if($("input[name='note_name']").val()==""){
+		alert("노트 입력은 필수입니다");
+		return;	
+	}
+	if($("input[name='noteFile']").val()==""){
+		alert("사진 입력은 필수입니다");
+		return;
+	}
+	
 	 $("form[name='form1']").attr({
 		action: "/admin/note/regist",
 		method: "post",

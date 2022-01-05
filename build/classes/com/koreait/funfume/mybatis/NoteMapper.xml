@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Note">
+	
+	<resultMap type="Note" id="JoinNoteTypeNote">
+		<id column="note_id" 						property="note_id"/>
+		<result column="note_name" 			property="note_name"/>
+		<result column="note_img"				property="note_img"/>
+		<association column="note_type_id" property="noteType" javaType="NoteType" select="NoteType.select" />		
+	</resultMap>
+	
+	<!-- 노트+타입 전체 -->
+	<sql id="selectAllNote">
+		select note_id, note_name , note_img,
+		t.note_type_id as note_type_id, note_type_name
+		from note_type t, note n
+		where t.note_type_id=n.note_type_id
+	</sql>
+	
+	<!-- 노트 목록가져오기 -->
+	<select id="selectAll" resultMap="JoinNoteTypeNote">
+		<include refid="selectAllNote"/>
+		order by note_id desc
+	</select>
+	
+	<!-- 노트 한건 가져오기 -->
+	<select id="select" parameterType="int" resultMap="JoinNoteTypeNote">
+		<include refid="selectAllNote"/>
+		and note_id=#{note_id}
+	</select>
+	
+	<!-- 선택한 노트타입만 가져오기 -->
+	<select id="selectType" parameterType="int" resultMap="JoinNoteTypeNote">
+		<include refid="selectAllNote"/>
+		and n.note_type_id=#{note_type_id}
+	</select>
+	
+	<!-- 노트 등록 -->
+	<insert id="insert" parameterType="Note">
+		insert into note(note_type_id, note_name, note_img) values(#{noteType.note_type_id}, #{note_name}, #{note_img})
+	</insert>
+	
+	<update id="update" parameterType="Note">
+		update note set note_type_id=#{noteType.note_type_id}, note_name=#{note_name}, note_img=#{note_img}
+		where note_id=#{note_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from note where note_id=#{note_id}
+	</delete>
+	
+</mapper>

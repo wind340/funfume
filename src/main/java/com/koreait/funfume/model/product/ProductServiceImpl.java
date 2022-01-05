@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.koreait.funfume.exception.ProductException;
 import com.koreait.funfume.exception.ProductImgException;
@@ -35,22 +37,36 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.insert(product);//상품정보
 		//product_id = 최근에 들어간 값
 		
-		
-		for(ProductImg obj :productImgList) {
-			//pk값을 채워넣자!
-			obj.setProduct(product); //productImg가 필요로 하는 부모의 객체를 대입!!
-			obj.getProduct().setProduct_id(product.getProduct_id());
-			
-			productImgDAO.insert(obj);//상품 이미지
+		if(productImgList !=null) {
+			for(ProductImg obj :productImgList) {
+				//pk값을 채워넣자!
+				obj.setProduct(product); //productImg가 필요로 하는 부모의 객체를 대입!!
+				obj.getProduct().setProduct_id(product.getProduct_id());
+				
+				productImgDAO.insert(obj);//상품 이미지
+			}
 		}
 	}
 
 	@Override
-	public void update(Product product) {
+	public void update(Product product, List<ProductImg> productImgList) throws ProductException, ProductImgException{
+		productDAO.update(product);
+		productImgDAO.delete(product.getProduct_id());
+		
+		if(productImgList !=null) {
+			for(ProductImg obj :productImgList) {
+				//pk값을 채워넣자!
+				obj.setProduct(product); //productImg가 필요로 하는 부모의 객체를 대입!!
+				productImgDAO.insert(obj);//상품 이미지
+			}
+		}
 	}
 
 	@Override
-	public void delete(int product_id) {
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void delete(int product_id) throws ProductException, ProductImgException{
+		productImgDAO.delete(product_id);
+		productDAO.delete(product_id);
 	}
 
 }

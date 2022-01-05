@@ -7,12 +7,22 @@
 		<typeAlias type="com.koreait.funfume.domain.Product" alias="Product"/>
 		<typeAlias type="com.koreait.funfume.domain.ProductImg" alias="ProductImg"/>
 		<typeAlias type="com.koreait.funfume.domain.Category" alias="Category"/>
+		<typeAlias type="com.koreait.funfume.domain.Admin" alias="Admin"/>
+		<typeAlias type="com.koreait.funfume.domain.Notice" alias="Notice"/>
+		<typeAlias type="com.koreait.funfume.domain.Accord" alias="Accord"/>
+		<typeAlias type="com.koreait.funfume.domain.Note" alias="Note"/>
+		<typeAlias type="com.koreait.funfume.domain.NoteType" alias="NoteType"/>
 	</typeAliases>
 			
   <mappers>
     <mapper resource="com/koreait/funfume/mybatis/ProductMapper.xml"/>
     <mapper resource="com/koreait/funfume/mybatis/ProductImgMapper.xml"/>
     <mapper resource="com/koreait/funfume/mybatis/CategoryMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/AdminMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/NoticeMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/AccordMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/NoteMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/NoteTypeMapper.xml"/>
   </mappers>
   
 </configuration>

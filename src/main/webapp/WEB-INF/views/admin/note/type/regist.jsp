@@ -64,7 +64,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form name ="form">
+              <form name ="form1">
                 <div class="card-body">
                   <div class="form-group">
                     <input type="text" class="form-control"  placeholder="노트타입을 입력 하세요" name="note_type_name">
@@ -104,11 +104,16 @@
 <script>
 
 function regist(){
-	 $("form[name='form']").attr({
+	//유효성 체크 
+	if($("input[name='note_type_name']").val()==""){
+		alert("타입 입력은 필수입력입니다");
+		return;
+	}
+	 $("form[name='form1']").attr({
 		action: "/admin/note/type/regist",
 		method: "get"
 	 });
-	 $("form[name='form']").submit();
+	 $("form[name='form1']").submit();
 }
 </script>
 

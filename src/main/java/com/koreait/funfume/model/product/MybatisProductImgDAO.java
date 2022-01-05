@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.koreait.funfume.model.product;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,4 +24,19 @@ public class MybatisProductImgDAO implements ProductImgDAO{
 			throw new ProductImgException("상품 사진 insert 실패");
 		}
 	}
+
+	@Override
+	public void update(ProductImg productImg) throws ProductImgException {
+		int result =sessionTemplate.update("ProductImg.update",productImg);
+		if(result ==0) {
+			throw new ProductImgException("상품 사진 update 실패");
+		}		
+	}
+
+	@Override
+	public void delete(int product_id) throws ProductImgException {
+		int result = sessionTemplate.delete("ProductImg.delete",product_id);
+		
+	}
+	
 }

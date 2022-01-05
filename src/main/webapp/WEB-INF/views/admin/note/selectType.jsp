@@ -76,7 +76,7 @@
 
 							<a href="/admin/note/type/detail?note_type_id=<%=noteType.getNote_type_id()%>">
 							<%=noteType.getNote_type_name() %></a>
-						<td><button type="button" class="btn btn-danger" onClick="searchType(<%=noteType.getNote_type_id()%>)">검색</button></td>
+						<td><button type="button" style="border:1px solid LightGray;" class="btn" onClick="searchType(<%=noteType.getNote_type_id()%>)">검색</button></td>
 
 					<%} %>
 						</td>
@@ -130,7 +130,7 @@
 	                    <%Note selType = selectType.get(curPos++); %>
                     <tr>
                       <td><%=num--%></td>
-                      <td><a href="/admin/note/detail?note_id=<%=selType.getNote_id()%>"> <%=selType.getNoteType().getNote_type_name() %></a></td>
+                      <td><%=selType.getNoteType().getNote_type_name() %></a></td>
                       <td><a href="/admin/note/detail?note_id=<%=selType.getNote_id()%>"><%=selType.getNote_name() %></a></td>
                       <td><a href="/admin/note/detail?note_id=<%=selType.getNote_id()%>">
                       <%if(selType.getNote_img()!= null) {%>

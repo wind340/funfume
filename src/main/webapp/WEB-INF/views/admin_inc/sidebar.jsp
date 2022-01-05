@@ -1,4 +1,8 @@
+<%@page import="com.koreait.funfume.domain.Admin"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<% 
+	Admin admin =  (Admin)session.getAttribute("admin");
+%>
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -14,7 +18,7 @@
           <img src="/resources/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><%-- <%=admin.getName()%> --%>님 접속 중</a>
         </div>
       </div>
 
@@ -69,7 +73,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/category/list" class="nav-link">
+                <a href="/admin/accord/list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>향</p>
                 </a>
@@ -143,7 +147,33 @@
           </li>
           <!-- 주메뉴 end -->
           
+          <!-- 주메뉴 begin -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                고객센터
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            
+            
+            <!-- 자식메뉴 begin -->
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/notice/list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>공지게시판</p>
+                </a>
+              </li>
+            </ul>
+            <!-- 자식메뉴 end -->
+          </li>
+          <!-- 주메뉴 end -->  
+                  
         </ul>
+        
       </nav>
       <!-- /.sidebar-menu -->
     </div>

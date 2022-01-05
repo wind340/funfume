@@ -3,6 +3,8 @@
  */
 package com.koreait.funfume.controller.admin;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,7 @@ public class MainController {
 	
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public ModelAndView getMain() {
+	public ModelAndView getMain(HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/index");

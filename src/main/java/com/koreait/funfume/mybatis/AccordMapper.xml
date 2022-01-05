@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Accord">
+
+<select id="selectAll" resultType="Accord">
+	select * from accord order by accord_id desc
+</select>
+
+<select id="select" parameterType="int" resultType="Accord">
+	select * from accord where accord_id=#{accord_id}
+</select>
+
+<insert id="insert" parameterType="Accord">
+	insert into accord(accord_name, accord_color)
+	values(#{accord_name},#{accord_color})
+	
+	<selectKey keyColumn="accord_id" order="AFTER" resultType="int" keyProperty="accord_id">
+	<!-- select seq_product.currval as product_id from dual (오라클의 쿼리문)-->
+	select last_insert_id() as accord_id 
+	</selectKey>
+</insert>
+
+<update id="update" parameterType="Accord">
+	update accord set accord_name=#{accord_name},accord_color=#{accord_color}
+	where accord_id=#{accord_id}
+</update>
+
+<delete id="delete" parameterType="int">
+	delete from accord where accord_id=#{accord_id}
+</delete>
+
+<!-- 향기이름 중복검사 -->
+<select id="accordCheck" resultType="int">
+	select count(*) from accord where accord_name = #{accord_name}
+</select>
+
+</mapper>

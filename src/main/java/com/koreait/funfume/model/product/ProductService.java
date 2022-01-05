@@ -11,6 +11,8 @@ public interface ProductService {
 	public List selectAll();
 	public Product select(int product_id);
 	public void regist(Product product, List<ProductImg> productImgList);
-	public void update(Product product);
+	public void update(Product product,List<ProductImg> productImgList);
 	public void delete(int product_id);
+	
+	
 }

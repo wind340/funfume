@@ -32,7 +32,7 @@ public class Pager {
 		}
 		firstPage = currentPage-(currentPage-1)%blockSize;
 		lastPage = firstPage +(blockSize -1);
-		curPos= (currentPage -1)*pageSize; //
+		curPos= pageSize*(currentPage -1); //
 		num= totalRecord -curPos;
 	}
 }

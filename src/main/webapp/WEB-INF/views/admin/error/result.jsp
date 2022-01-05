@@ -8,6 +8,7 @@
 <body>
 <% 
 	RuntimeException e =(RuntimeException)request.getAttribute("e");%>
-이용에 불편을 드려 죄송합니다. 
+이용에 불편을 드려 죄송합니다.<p> 
+<%= e.getMessage() %>
 </body>
 </html>

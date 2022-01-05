@@ -22,23 +22,32 @@ public class MybatisProductDAO implements ProductDAO {
 
 	@Override
 	public Product select(int product_id) {
-		return sessionTemplate.selectOne("Product.select",product_id);
+		Product product =sessionTemplate.selectOne("Product.select",product_id);
+		return product;
 	}
 
 	@Override
 	public void insert(Product product) throws ProductException{
 		int result = sessionTemplate.insert("Product.insert",product);
 		if(result ==0) {
-			throw new UploadException("상품등록실패");
+			throw new UploadException("상품 등록 실패");
 		}
 	}
 
 	@Override
-	public void update(Product product) {
+	public void update(Product product) throws ProductException{
+		int result = sessionTemplate.update("Product.update",product);
+		if(result ==0) {
+			throw new UploadException("상품 수정 실패");
+		}
 	}
 
 	@Override
-	public void delete(int product_id) {
+	public void delete(int product_id)throws ProductException {
+		int result = sessionTemplate.delete("Product.delete",product_id);
+		if(result ==0) {
+			throw new UploadException("상품 삭제 실패");
+		}		
 	}
 
 }

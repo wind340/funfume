@@ -2,18 +2,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AdminLTE 3 | Dashboard</title>
 	
 	<%@ include file="../../admin_inc/head_link.jsp" %>
 	
-  <!-- CodeMirror -->
-  <link rel="stylesheet" href="/resources/admin/plugins/codemirror/codemirror.css">
-  <link rel="stylesheet" href="/resources/admin/plugins/codemirror/theme/monokai.css">	
-  
-  <!-- summernote -->
-  <link rel="stylesheet" href="/resources/admin/plugins/summernote/summernote-bs4.min.css">
+	<!-- CodeMirror -->
+	<link rel="stylesheet" href="/resources/admin/plugins/codemirror/codemirror.css">
+	<link rel="stylesheet" href="/resources/admin/plugins/codemirror/theme/monokai.css">	
+	
+	<!-- summernote -->
+	<link rel="stylesheet" href="/resources/admin/plugins/summernote/summernote-bs4.min.css">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	
+	<style>
+	.drag-over { background-color: #ff0; }
+	.thumb { width:200px; padding:5px; float:left; }
+	.thumb > img { width:100%; }
+	.thumb > .close { position:absolute; background-color:red; cursor:pointer; }
+	</style>
+
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -63,7 +73,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form name ="form1">
+              <form name ="form1" id="form1">
                 <div class="card-body">
                 
                   
@@ -83,7 +93,7 @@
 	                    	</select>
                     </div>
                     <div class="form-group">
-                    	<select>
+                    	<select name ="note_id">
                     		<option>노트</option>
                     		<option>1</option>
                     		<option>2</option>
@@ -91,7 +101,7 @@
                     	</select>
                     </div>
                     <div class="form-group">
-                    	<select>
+                    	<select name ="accord_id">
                     		<option>향</option>
                     		<option>1</option>
                     		<option>2</option>
@@ -101,29 +111,23 @@
                     <div class="form-group">
                     	<select name ="gender_id">
                     		<option >gender</option>
-                    		<option value= "1">male</option>
-                    		<option value= "2">female</option>
-                    		<option value= "3">unisex</option>
+                    		<option value="1">male</option>
+                    		<option value="2">female</option>
+                    		<option value="3">unisex</option>
                     	</select>
                     </div>
                   
                   <div class="form-group">
-                  	<textarea id="introduction" name="introduction">
-                  		상품 소개
-              		</textarea>
+                  	<textarea id="introduction" name="introduction">상품 소개</textarea>
                	  </div>
                	  
                   <div class="form-group">
-                  <div id="preview"></div>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" multiple name="imgFiles">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
-                    </div>
+					<div id="drop" style="border:1px solid black; width:800px; height:300px; padding:3px">
+						여기로 drag & drop
+					<div id="thumbnails">
+					</div>
+					<input type="hidden" id ="datas" name="datas" value="">
+					</div>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -182,9 +186,9 @@ $(function () {
     	preview(this);
     }); 
     */
-    $("#bt_regist").click(function(){
+/*     $("#bt_regist").click(function(){
     	regist();
-    });
+    }); */
   })
 
   
@@ -225,12 +229,84 @@ function preview(obj){
 		 img.src=e.target.result;
 		 img.style.width=100+"px";
 		 document.getElementById("preview").appendChild(img);//동적으로 이미지 돔을 div에 넣기!!
-		 
 		};//파일을 다 읽어들이면, 익명함수 호출...
 		
 		reader.readAsDataURL(obj.files[i]); //파일 읽어들이기...
 	}
   }
+  
+var uploadFiles = [];
+var $drop = $("#drop");
+
+$drop.on("dragenter", function(e) { //드래그 요소가 들어왔을떄
+	$(this).addClass('drag-over');
+}).on("dragleave", function(e) { //드래그 요소가 나갔을때
+	$(this).removeClass('drag-over');
+}).on("dragover", function(e) {
+	e.stopPropagation();
+	e.preventDefault();
+}).on('drop', function(e) { //드래그한 항목을 떨어뜨렸을때
+	e.preventDefault();
+	$(this).removeClass('drag-over');
+	var files = e.originalEvent.dataTransfer.files; //드래그&드랍 항목
+	for(var i = 0; i < files.length; i++) {
+		var file = files[i];
+		var size = uploadFiles.push(file); //업로드 목록에 추가
+		preview(file, size - 1); //미리보기 만들기
+	}
+});
+function preview(file, idx) {
+	var reader = new FileReader();
+	reader.onload = (function(f, idx) {
+		return function(e) {
+			var div = '<div class="thumb"> \
+			<div class="close" data-idx="' + idx + '">X</div> \
+			<img src="' + e.target.result + '" title="' + escape(f.name) + '"/> \
+			</div>';
+			$("#thumbnails").append(div);
+		};
+	})(file, idx);
+	reader.readAsDataURL(file);
+}
+	
+$("#bt_regist").on("click", function() {
+	var formData = new FormData(); //폼을 대체할 것ㄷ임 
+	
+	$.each(uploadFiles, function(i, file) {
+		if(file.upload != 'disable') //삭제하지 않은 이미지만 업로드 항목으로 추가
+		formData.append('imgFiles', file, file.name);
+		console.log(file);
+		console.log(file.name);
+	});
+	
+	
+	formData.append('product_name', $("input[name='product_name']").val());
+	formData.append('price', 		$("input[name='price']").val());
+	formData.append('brand_id', 	$("select[name='brand_id']").val());
+	formData.append('gender_id', 	$("select[name='gender_id']").val());
+	formData.append('introduction', $("textarea[name='introduction']").val());
+	
+	
+ 	$.ajax({
+		url: '/admin/product/regist',
+		data : formData,
+		type : 'post',
+		contentType : false,
+		processData: false,
+		success : function(ret) {
+			alert("완료");
+			location.href="/admin/product/list";
+		}
+	}); 
+	
+});
+	$("#thumbnails").on("click", ".close", function(e) {
+	var $target = $(e.target);
+	var idx = $target.attr('data-idx');
+	uploadFiles[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+	$target.parent().remove(); //프리뷰 삭제
+	});  
+
 </script>
 
 </body>

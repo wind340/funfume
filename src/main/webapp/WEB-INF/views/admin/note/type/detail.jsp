@@ -1,7 +1,10 @@
+<%@page import="com.koreait.funfume.domain.Note"%>
+<%@page import="java.util.List"%>
 <%@page import="com.koreait.funfume.domain.NoteType"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	NoteType noteType = (NoteType)request.getAttribute("noteType");
+	List<Note> selectType= (List)request.getAttribute("selectType");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,8 +73,12 @@
               <form name ="form">
                 <div class="card-body">
                   <div class="form-group">
+                 	<p>현재 <%=noteType.getNote_type_name()%>의 개수는 ' <%=selectType.size()%> '개 입니다 </p>
+                 	<input type="hidden" id="type_num" value="<%=selectType.size()%>">
                     <input type="hidden" name="note_type_id" value="<%=noteType.getNote_type_id()%>" >
-                    <input type="text" class="form-control" name="note_type_name" value="<%=noteType.getNote_type_name() %>" >
+                    <input type="text" class="form-control" name="note_type_name" value="<%=noteType.getNote_type_name()%>" >
+                 	<br>
+                 	<p style="background-color:Tomato;">노트가 있는 경우 삭제 하실수 없습니다. 노트가 없을시 타입 삭제 가능합니다.<p>
                   </div>
                                    	  
                 <!-- /.card-body -->
@@ -115,8 +122,12 @@ function edit(){
 		form.submit();
 	}
 }
- 
+
 function del(){
+	if($("#type_num").val()>0){
+		alert("노트가 소속되어있어 삭제를 실패했습니다");
+		return;
+	} 
 	if(confirm("삭제하시겠습니까?")){
 		location.href="/admin/note/type/delete?note_type_id=<%=noteType.getNote_type_id()%>";
 	}	

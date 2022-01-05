@@ -15,7 +15,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Funfume</title>
 	
 	<%@ include file="../../admin_inc/head_link.jsp" %>
 </head>
@@ -63,28 +63,29 @@
         <div class="row">
         
    		<div class="col-3">
-            <div class="card card-danger">
+            <div class="card text-center card-danger">
               <div class="card-header">
                 <h3 class="card-title">타입 목록</h3>
                </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <table class="table table-hover" >
-                  <tbody align="center">
+                  <tbody align="center" >
                     <% for(NoteType noteType : noteTypeList){ %>
                     <tr data-widget="expandable-table" aria-expanded="true">
-                   		<td>
-
+                   		<td colspan="2">
 							<a href="/admin/note/type/detail?note_type_id=<%=noteType.getNote_type_id()%>">
 							<%=noteType.getNote_type_name() %></a>
-						<td><button type="button" class="btn btn-danger" onClick="searchType(<%=noteType.getNote_type_id()%>)">검색</button></td>
+						<td><button type="button" class="btn" style="border:1px solid LightGray;" onClick="searchType(<%=noteType.getNote_type_id()%>)">검색</button></td>
 
 					<%} %>
 						</td>
                    </tbody> 
 				<tfoot>
-					<td colspan="2" align="center">
-       					<button type="button" class="btn btn-danger" onClick="location.href='/admin/note/type/registForm';">노트 타입 등록</button>
+					<td colspan="3">
+       					<button type="button" class="btn btn-danger" onClick="location.href='/admin/note/type/registForm';">등록</button>
+				
+       					<button type="button" class="btn btn-danger" onClick="location.href='/admin/note/type/list';">목록</button>
 					</td>
 				</tfoot>
 				</table>
@@ -131,7 +132,7 @@
 	                    <%Note note = noteList.get(curPos++); %>
                     <tr>
                       <td><%=num--%></td>
-                      <td><a href="/admin/note/detail?note_id=<%=note.getNote_id()%>"> <%=note.getNoteType().getNote_type_name() %></a></td>
+                      <td><%=note.getNoteType().getNote_type_name() %></a></td>
                       <td><a href="/admin/note/detail?note_id=<%=note.getNote_id()%>"><%=note.getNote_name() %></a></td>
                       <td><a href="/admin/note/detail?note_id=<%=note.getNote_id()%>">
                       <%if(note.getNote_img()!= null) {%>

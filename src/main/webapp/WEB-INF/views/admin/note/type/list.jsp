@@ -53,11 +53,11 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <div class="row" align="center">
+        <div class="row" ralign="cente">
           <div class="col-6">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">타입 목록</h3>
+            <div class="card card-danger">
+              <div class="card-header" >
+                <h3 class="card-title center">타입 목록</h3>
                </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -65,9 +65,8 @@
                   <tbody align="center">
                     <% for(NoteType noteType : noteTypeList){ %>
                     <tr data-widget="expandable-table" aria-expanded="true">
-                   		<td>
-							<a href="/admin/note/type/detail?note_type_id=<%=noteType.getNote_type_id()%>">
-							<%=noteType.getNote_type_name() %></a>
+                   		<td onClick="location.href='/admin/note/type/detail?note_type_id=<%=noteType.getNote_type_id()%>'">
+                   		<a href="#"><%=noteType.getNote_type_name() %></a>
 					<%} %>
 						</td>
                    </tbody> 

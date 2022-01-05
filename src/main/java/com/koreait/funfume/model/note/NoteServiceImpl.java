@@ -24,7 +24,6 @@ public class NoteServiceImpl implements NoteService{
 		return noteDAO.select(note_id);
 	}
 	
-	//
 	@Override
 	public void insert(Note note) throws NoteException{
 		noteDAO.insert(note);

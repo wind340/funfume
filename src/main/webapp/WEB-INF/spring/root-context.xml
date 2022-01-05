@@ -4,9 +4,13 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	
 	<!-- 스프링 데이터베이스 연동 관련(커넥션 취득) -->
@@ -33,6 +37,48 @@
 	
 	
 	<!-- 웹사이트에서 공통으로 사용할 빈들을 여기에 하자 @service..emdemd -->
-	<context:component-scan base-package="com.koreait.funfume.model"/>
-	<context:component-scan base-package="com.koreait.funfume.exception"/>
+	<context:component-scan base-package="com.koreait.funfume.model"></context:component-scan>
+	
+	<!-- 해시값 변환 빈 등록-->
+	<bean class= "com.koreait.funfume.util.HashBuilder" id ="hashBuilder"></bean>
+	
+	
+	
+	<!-- 자바객체와 JSON간의 변환을 자동으로 처리해주는 컨버터 등록 -->
+	<bean class= "org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" id ="mappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<value>
+				application/json;charset=utf-8
+				text/html;charset=utf-8
+			</value>
+		</property>
+	</bean>
+	
+	
+	<!-- 어댑터 등록 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" id="requestMappingHandlerAdapter">
+		<property name="messageConverters" >
+			<list value-type="java.util.ArrayList">
+				<ref bean="mappingJackson2HttpMessageConverter"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 트랜잭션 설정 xml에 설정하는 것을 가리켜 선언적 설정 -->
+	<!-- 개발자 대신 트랜잭션(관련 기술에 알맞게 - mybatis,hibernate,jpa)을 처리해 주는 트랜잭션 매니져 관점을 두자 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="regist" propagation="REQUIRED"/>
+			<tx:method name="delete" propagation="REQUIRED"/>
+			
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 모든 서비스 aop -->
+	<aop:config>
+		<aop:pointcut expression="execution(public * com.koreait.funfume.model..*Service.*(..))" id="serviceCut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceCut"/>
+		
+	</aop:config>
 </beans>
