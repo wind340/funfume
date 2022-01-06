@@ -32,7 +32,6 @@
 	p:maxUploadSize="1048576"></beans:bean>
 	
 	<beans:bean class="com.koreait.funfume.util.FileManager" id="fileManager"/>
-	<beans:bean class="com.koreait.funfume.util.Pager" id="pager"/>
 	<beans:bean class= "com.koreait.funfume.aop.AdminExceptionAdvice" id="adminExceptionAdvice"/>
 	
 	<!-- 로그인 aop 설정 -->

@@ -8,7 +8,6 @@
 	List<Note> noteList = (List)request.getAttribute("noteList");//상품목록
 	Pager pager = (Pager)request.getAttribute("pager"); //페이징 처리객체
 	List<NoteType> noteTypeList = (List)request.getAttribute("noteTypeList");
-
 %>
 <!DOCTYPE html>
 <html lang="en">

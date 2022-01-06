@@ -6,6 +6,16 @@
 	
 		insert into product_img(product_id,img) values(#{product.product_id},#{img})
 	</insert>
+	
+	<select id="selectAll" parameterType="int"  resultType="ProductImg">
+		select * from product_img where product_id=#{product_id}
+	</select>
 
-
+	<update id="update" parameterType="ProductImg">
+		update product_img set img=#{img} where product_id= #{product.product_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from product_img where product_id=#{product_id}
+	</delete>
 </mapper>

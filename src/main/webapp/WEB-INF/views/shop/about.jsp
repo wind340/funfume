@@ -98,33 +98,10 @@
 <%@ include file="../shop_inc/footer.jsp" %>
 
 	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<i class="zmdi zmdi-chevron-up"></i>
-		</span>
-	</div>
+<%@ include file="../shop_inc/back_to_top.jsp" %>
 
+	<!-- Bottom_link -->
 <%@ include file="../shop_inc/bottom_link.jsp" %>
 
-<!--===============================================================================================-->
-	<script src="/resources/funfume/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/resources/funfume/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
-
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
-	
 </body>
 </html>

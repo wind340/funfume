@@ -41,6 +41,7 @@
 	
 	<!-- 해시값 변환 빈 등록-->
 	<bean class= "com.koreait.funfume.util.HashBuilder" id ="hashBuilder"></bean>
+	<bean class="com.koreait.funfume.util.Pager" id="pager"/>
 	
 	
 	

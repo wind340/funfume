@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-
+	<header class="header-v4">
 	<!-- Header desktop -->
 	<div class="container-menu-desktop">
 		<!-- Topbar -->
 		<div class="top-bar">
 			<div class="content-topbar flex-sb-m h-full container">
 				<div class="left-top-bar">
-					Free shipping for standard order over $100
+					Free shipping for standard order over 10,000￦
 				</div>
 
 				<div class="right-top-bar flex-w h-full">
@@ -33,7 +33,7 @@
 			<nav class="limiter-menu-desktop container">
 				
 				<!-- Logo desktop -->		
-				<a href="#" class="logo">
+				<a href="/" class="logo">
 					<img src="/resources/funfume/images/icons/logo-01.png" alt="IMG-LOGO">
 				</a>
 
@@ -41,33 +41,25 @@
 				<div class="menu-desktop">
 					<ul class="main-menu">
 						<li class="active-menu">
-							<a href="/resources/funfume/index.html">Home</a>
-							<ul class="sub-menu">
-								<li><a href="/resources/funfume/index.html">Homepage 1</a></li>
-								<li><a href="/resources/funfume/home-02.html">Homepage 2</a></li>
-								<li><a href="/resources/funfume/home-03.html">Homepage 3</a></li>
-							</ul>
+							<a href="/">Home</a>
+
 						</li>
 
 						<li>
-							<a href="/resources/funfume/product.html">Shop</a>
-						</li>
-
-						<li class="label1" data-label1="hot">
-							<a href="/resources/funfume/shoping-cart.html">Features</a>
+							<a href="/shop">Shop</a>
 						</li>
 
 						<li>
-							<a href="/resources/funfume/blog.html">Blog</a>
+							<a href="/cart">Cart</a>
+						</li>
+						<li>
+							<a href="/blog">Blog</a>
 						</li>
 
 						<li>
-							<a href="/resources/funfume/about.html">About</a>
+							<a href="/about">About</a>
 						</li>
 
-						<li>
-							<a href="/resources/funfume/contact.html">Contact</a>
-						</li>
 					</ul>
 				</div>	
 
@@ -168,7 +160,7 @@
 			</li>
 
 			<li>
-				<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+				<a href="shoping-cart.html" >Shopping cart</a>
 			</li>
 
 			<li>
@@ -200,3 +192,4 @@
 			</form>
 		</div>
 	</div>
+</header>
