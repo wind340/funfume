@@ -113,7 +113,7 @@
 					<div class="block1 wrap-pic-w">
 						<img src="/resources/funfume/images/banner-01.jpg" alt="IMG-BANNER">
 
-						<a href="/shop" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
 									Women
@@ -439,14 +439,11 @@
 						<div class="block2-pic hov-img0">
 						<%ProductImg productImg=(ProductImg)product.getProductImgs().get(0);%>
 							<img src="/resources/data/<%=productImg.getImg() %>" alt="IMG-PRODUCT">
-							<a href="/product/product_id=?<%=product.getProduct_id()%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Quick
-							</a>
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="/detail/" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="/detail?product_id=<%=product.getProduct_id() %>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									<%=product.getProduct_name() %>
 								</a>
 
@@ -485,7 +482,7 @@
 	<!-- Back to top -->
 <%@ include file="../shop_inc/back_to_top.jsp" %>
 	<!-- Modal1 -->
-<%@ include file="../shop_inc/modal1.jsp" %>
+<%-- <%@ include file="../shop_inc/modal1.jsp" %>--%>
 	<!-- Bottom_link -->
 <%@ include file="../shop_inc/bottom_link.jsp" %>
 	<!-- Bottom_link 2 -->

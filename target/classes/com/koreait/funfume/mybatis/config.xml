@@ -12,6 +12,11 @@
 		<typeAlias type="com.koreait.funfume.domain.Accord" alias="Accord"/>
 		<typeAlias type="com.koreait.funfume.domain.Note" alias="Note"/>
 		<typeAlias type="com.koreait.funfume.domain.NoteType" alias="NoteType"/>
+		<typeAlias type="com.koreait.funfume.domain.OrderSummary" alias="OrderSummary"/>
+		<typeAlias type="com.koreait.funfume.domain.Paymethod" alias="Paymethod"/>
+		<typeAlias type="com.koreait.funfume.domain.Member" alias="Member"/>
+		<typeAlias type="com.koreait.funfume.domain.OrderDetail" alias="OrderDetail"/>
+		
 	</typeAliases>
 			
   <mappers>
@@ -23,6 +28,10 @@
     <mapper resource="com/koreait/funfume/mybatis/AccordMapper.xml"/>
     <mapper resource="com/koreait/funfume/mybatis/NoteMapper.xml"/>
     <mapper resource="com/koreait/funfume/mybatis/NoteTypeMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/OrderSummaryMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/PaymethodMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/MemberMapper.xml"/>
+    <mapper resource="com/koreait/funfume/mybatis/OrderDetailMapper.xml"/>
   </mappers>
   
 </configuration>

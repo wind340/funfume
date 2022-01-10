@@ -36,7 +36,6 @@ public class ProductServiceImpl implements ProductService {
 		//product_id =0
 		productDAO.insert(product);//상품정보
 		//product_id = 최근에 들어간 값
-		
 		if(productImgList !=null) {
 			for(ProductImg obj :productImgList) {
 				//pk값을 채워넣자!

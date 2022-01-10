@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.koreait.funfume.domain.Note;
 import com.koreait.funfume.domain.Product;
 import com.koreait.funfume.domain.ProductImg;
 import com.koreait.funfume.model.product.ProductService;
@@ -25,11 +27,10 @@ public class ShopController {
 	@Autowired
 	private ProductService productService;
 	
-
-	
 	@Autowired
 	private Pager pager;
 	
+	//메인페이지 요청
 	@GetMapping("/")
 	public String getMain(HttpServletRequest request, Model model) {
 		List<Product> productList = productService.selectAll();
@@ -37,19 +38,26 @@ public class ShopController {
 		return "shop/index";
 	}
 	
+	//상품페이지 요청
 	@GetMapping("/shop")
-	public ModelAndView getProduct() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("shop/product");
-		return mav;
+	public String getProduct(HttpServletRequest request, Model model) {
+		List<Product> productList = productService.selectAll();
+		model.addAttribute("productList",productList);
+		return "shop/product";
 	}
-	@GetMapping("/detail")
-	public ModelAndView getProductDetail() {
+	
+	//상품 디테일 페이지 요청
+	@GetMapping("/product-detail")
+	public ModelAndView getProductDetail(HttpServletRequest request, int product_id) {
+		Product product =productService.select(product_id);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("product",product);
 		mav.setViewName("shop/product-detail");
 		return mav;
 	}
-	@GetMapping("/cart")
+	
+	//
+	@GetMapping("/features")
 	public ModelAndView getCart() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("shop/shoping-cart");
@@ -73,6 +81,17 @@ public class ShopController {
 		mav.setViewName("shop/blog-detail");
 		return mav;
 	}
-
+	@GetMapping("/myaccount")
+	public ModelAndView getMyAccount() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shop/myaccount");
+		return mav;
+	}
+	@GetMapping("/mypage")
+	public ModelAndView getMyPage() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shop/mypage");
+		return mav;
+	}
 
 }

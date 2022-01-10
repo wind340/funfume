@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderDetail">
+	
+	<resultMap type="OrderDetail" id="JoinDetailProduct">
+		<id column="order_detail_id" property="order_detail_id" />
+		<result column="ea" property="ea" />
+		<collection column="order_summary_id" property="orderSummary" javaType="OrderSummary" select="OrderSummary.selectAll"></collection>
+		<collection column="product_id" property="product" javaType="Product" select="Product.select"></collection>
+	</resultMap>
+	
+	<!-- 주문요약보기 -->
+	<sql id="selectSummary">
+		select order_detail_id, os.order_summary_id as order_summary_id, p.product_id as product_id, product_name, ea
+		from order_detail od, order_summary os, product p
+		where od.order_summary_id=os.order_summary_id and od.product_id=p.product_id
+	</sql>
+	
+	<!-- 주문 목록가져오기(본인만) -->
+	<select id="selectAll" parameterType="int" resultMap="JoinDetailProduct">
+		<include refid="selectSummary"/>
+			and od.order_summary_id=#{order_summary_id}
+	</select>
+	
+	<insert id="insert" parameterType="OrderDetail">
+		insert into order_detail(order_summary_id, product_id, ea)
+		value(#{order_summary_id}, #{product_id}, #{ea})
+	</insert>
+	
+</mapper>

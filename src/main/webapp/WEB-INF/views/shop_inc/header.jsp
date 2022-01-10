@@ -14,7 +14,7 @@
 						Help & FAQs
 					</a>
 
-					<a href="#" class="flex-c-m trans-04 p-lr-25">
+					<a href="/myaccount" class="flex-c-m trans-04 p-lr-25">
 						My Account
 					</a>
 
@@ -34,7 +34,7 @@
 				
 				<!-- Logo desktop -->		
 				<a href="/" class="logo">
-					<img src="/resources/funfume/images/icons/logo-01.png" alt="IMG-LOGO">
+					<img src="/resources/images/logo.jpg" alt="IMG-LOGO">
 				</a>
 
 				<!-- Menu desktop -->
@@ -50,7 +50,7 @@
 						</li>
 
 						<li>
-							<a href="/cart">Cart</a>
+							<a href="/features">Features</a>
 						</li>
 						<li>
 							<a href="/blog">Blog</a>
@@ -111,7 +111,6 @@
 		</div>
 	</div>
 
-
 	<!-- Menu Mobile -->
 	<div class="menu-mobile">
 		<ul class="topbar-mobile">
@@ -127,7 +126,7 @@
 						Help & FAQs
 					</a>
 
-					<a href="#" class="flex-c-m p-lr-10 trans-04">
+					<a href="/mypage" class="flex-c-m p-lr-10 trans-04">
 						My Account
 					</a>
 

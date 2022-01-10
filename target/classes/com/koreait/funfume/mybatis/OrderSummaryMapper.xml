@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderSummary">
+
+	<resultMap type="OrderSummary" id="JoinSummaryPaymethod">
+		<id column="order_summary_id"			property="order_summary_id"/>
+		<result column="orderdate"					property="orderdate"/>
+		<collection	column="member_id"	property="member" javaType="Member" select="Member.select"/>				
+		<collection column="paymethod_id" property="paymethod" javaType="Paymethod" select="Paymethod.select" />
+	</resultMap>	
+	
+	<!-- 주문요약보기 -->
+	<sql id="selectSummary">
+		select order_summary_id, py.paymethod_id as paymethod_id, m.member_id as member_id, orderdate, member_name, method, totalpay
+		from order_summary os, paymethod py, member m
+		where m.member_id=os.member_id and py.paymethod_id=os.paymethod_id
+	</sql>
+	
+	<!--member_id로 주문 목록가져오기 -->
+	<select id="selectAll" parameterType="int" resultMap="JoinSummaryPaymethod">
+		<include refid="selectSummary"/>
+			and os.member_id=#{member_id} order by orderdate desc
+	</select>
+	
+		
+	<insert id="insert" parameterType="OrderSummary">
+		insert into order_summary(member_id, paymethod_id, totalpay)
+		values(#{member_id}, #{paymethod_id}, #{totalpay})
+		<selectKey keyColumn="order_summary_id" order="AFTER" resultType="int" keyProperty="order_summary_id">
+			<!-- select seq_product.currval as product_id from dual -->
+			select last_insert_id() as order_summary_id 
+		</selectKey>
+	</insert>
+	
+</mapper>
