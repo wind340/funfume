@@ -32,7 +32,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">제품 목록</h1>
+            <h1 class="m-0">공지 게시판</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -53,12 +53,13 @@
           <div class="col-12">
             <div class="card card-info">
               <div class="card-header" >
+            	등록된 공지를 확인하세요
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
                     <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
+                      <button type="button" class="btn btn-default">
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
@@ -77,18 +78,9 @@
                       <th>조회수</th>
                     </tr>
                   </thead>
-                  <tbody>
-                  	
-                    <tr id="dataList">
-                    </tr>
-                    
-                    <tr>
-                    	<td colspan="4">
-                    		<button type="button" class="btn btn-info" onClick="location.href='/admin/notice/registForm';">상품등록</button>
-                    	</td>
-                    </tr>
-                  </tbody>
+                  <tbody id="dataList"></tbody>
                 </table>
+                  		<button type="button" class="btn btn-info" onClick="location.href='/admin/notice/registForm';">공지등록</button>
               </div>
               <!-- /.card-body -->
             </div>
@@ -120,7 +112,7 @@
 <script type="text/javascript">
 $(function(){
 	getList();
-})
+});
 
 //서버에 비동기 요청으로 게시물 목록 가져오기(json배열로)
 function getList(){
@@ -131,19 +123,18 @@ function getList(){
 			//alert(result);
 			//실제 데이터를 tr에 dom생성하면서 반영해보자
 			var tag="";
-			
 			for( var i =0; i<result.length;i++){
-				var json=result[i];
-				
+				var json=result[i]; //배열에서 i번째 요소 꺼내기
+				tag+="<tr>";
 				tag +="<td></td>";
-				tag +="<td><a href='/admin/rest/notice/"+json.notice_id+"'>"+json.title+"</a></td>";
+				tag +="<td><a href='/admin/notice/detail?notice_id="+json.notice_id+"'>"+json.title+"</a></td>"; //rest아니게 넣어줘야 디테일에서 비동기처럼 돌아감 
 				tag +="<td>"+json.writer+"</td>";
 				tag +="<td>"+json.regdate+"</td>";
 				tag +="<td>"+json.hit+"</td>";
+				tag+="</tr>";
 			}
 			$("#dataList").append(tag);
 		}
-		
 	});
 }
 </script>

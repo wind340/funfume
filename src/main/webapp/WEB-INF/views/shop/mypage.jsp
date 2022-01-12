@@ -1,122 +1,116 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>Home</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-	input {
-		width: 60%;
-		padding: 10px 20px;
-		margin: 1px 0;
-		box-sizing: border-box;
-	}
-	input[type="text"], [type="password"]{
-		border: solid 1px #FFE4B5;
-		-webkit-transition: 0.5s;
-		transition: 0.5s;
-		outline: none;
-	}
-input[type="text"]:focus { border: solid 1px #D2691E; }
-input[type="password"]:focus { border: solid 1px #D2691E; }
-
-</style>
-
-	<!--  Head Link -->
+<meta charset="UTF-8">
+<title>FUNFUME | 마이페이지</title>
 <%@ include file="../shop_inc/head_link.jsp"%>	
-
 </head>
-<body class="animsition">
-	
+<body>
 	<!-- Header -->
 <%@ include file="../shop_inc/header.jsp" %>
+
 	<!-- Cart -->
 <%@ include file="../shop_inc/cart.jsp" %>
-
-
-	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('/resources/images/3.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">
-			My Page
-		</h2>
-	</section>	
-
-	<!--  My page  -->
-	<section class="bg0 p-t-75 p-b-120">
+<!-- Content page -->
+<% Member myInfo = (Member)session.getAttribute("member");%>
+	<section class="bg0 p-t-104 p-b-116">
 		<div class="container">
-			<div class="row p-t-50 p-b-50">
-				<div class="col-lg-8">
-					<div class="p-r-85 p-r-15-lg p-r-0-md">
-						<h3 class="mtext-111 cl2 p-b-16">
-							My account
-						</h3>
-						<form>
-						<input type="hidden" id="member_id" value="고유member_id">
- 						<p class="stext-113 cl6 p-b-26">
-							<div class="row g-0">
-								<div class="col-6 col-md-4"> E - Mail</div>
-  								<input type="text" placeholder="abcde@gmail.com" value="">
-  								
-							</div>  
-						</p> 
- 						<p class="cl6 p-b-26">
-							<div class="row g-0">
-								<div class="col-6 col-md-4"> Name </div>
-  								
-  								<input type="text" placeholder="David" value="">
-  								
-							</div>  
-						</p> 
- 						<p class="stext-113 cl6 p-b-26">
-							<div class="row g-0">
-								<div class="col-6 col-md-4"> Password </div>
-  								<input type="password" placeholder="●●●●●●" value="">
-							</div>  
-						</p> 
- 						<p class="stext-113 cl6 p-b-26">
-							<div class="row g-0">
-								<div class="col-6 col-md-4"> Address </div>
-  								<input type="text" placeholder="Seoul-si" value="">
-							</div>  
-						</p> 
- 						<p class="stext-113 cl6 p-b-26">
-							<div class="row g-0">
-								<div class="col-6 col-md-4"> Address 2 </div>
-  								<input type="text" placeholder="Yongsan-gu" value="" style="backgroud-color:black;">
-							</div>  
-						</p> 
-						<p class="stext-113 cl6 p-b-26">
-							<div align="center">
-								<button type="button" class="btn btn-outline-secondary" >수정하기</button>
-								<button type="button" class="btn btn-outline-secondary" >탈퇴하기</button>
-							</div>  
-						</p> 
-						
-					</div>
-					</form>
-				</div>
-				
-				<div class="col-11 col-md-5 col-lg-4 m-lr-auto">
-					<div class="how-bor1 ">
-						<div class="hov-img0">
-							<img src="/resources/funfume/images/about-01.jpg" alt="IMG">
+			<div class="flex-w flex-tr">
+				<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md" style="margin:0 auto;">
+					<form name="form1" method="post">
+						<h4 class="mtext-105 cl2 txt-center p-b-30">
+							회원정보 수정
+						</h4>
+
+						<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="hidden" name="member_id" value="<%=myInfo.getMember_id() %>" >
+						<span>이름(수정불가)</span>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" readonly value="<%=myInfo.getMember_name() %>" >
 						</div>
-					</div>
+						<span>이메일(수정불가)</span>
+						<div class="bor8 m-b-10 how-pos4-parent" >
+							<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="email"  readonly  value="<%=myInfo.getEmail() %>" >
+						</div>
+						<span>비밀번호 변경</span>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="password"  name="pass" >
+						</div>
+						<span>주소</span>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" name= "addr1" value="<%=myInfo.getAddr1() %>" >
+						</div>
+						<span>상세 주소</span>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" name= "addr2" value="<%=myInfo.getAddr2() %>" >
+						</div>
+						<button  type="button" id="infoSave" class="flex-c-m m-b-10 stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+							수정하기
+						</button>
+						<button  type="button" id="infoDel" onClick="del(<%=myInfo.getMember_id() %>)" class="flex-c-m m-b-10 stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+							회원탈퇴
+						</button>
+						
+					</form>
 				</div>
 			</div>
 		</div>
 	</section>	
-	
+
+
 
 	<!-- Footer -->
 <%@ include file="../shop_inc/footer.jsp" %>
 	<!-- Back to top -->
 <%@ include file="../shop_inc/back_to_top.jsp" %>
+	<!-- Modal1 -->
 	<!-- Bottom_link -->
 <%@ include file="../shop_inc/bottom_link.jsp" %>
+	<!-- Bottom_link 2 -->
+<%@ include file="../shop_inc/bottom_link2.jsp" %>
 
+<script>
+$(function () {
+ 	$("#infoSave").click(function(){
+		edit();
+	}); 
+})
+
+
+function edit(){
+	if(confirm("수정하시겠습니까?")){
+		form1.action="/myinfoUpdate";
+		form1.method="post";
+		form1.submit();
+		alert("회원정보가 수정되었습니다.");
+	}
+}
+
+function del(n){
+	if(confirm("정말로 탈퇴하시겠습니까?")){
+		location.href="/infoDel?member_id="+n
+	}
+}
+
+
+/*function passCheck(){
+	$.ajax({
+		url:"/passCheck",
+		type:"POST",
+		data:{
+			pass:$("input[name='pass']").val()	
+		},
+		success:function(result,status,xhr){
+			alert(result.msg);
+			
+			if(result.code==1){
+				location.href="/mypage"
+			}
+		}
+	}); 
+}*/
+
+
+</script>
 </body>
 </html>

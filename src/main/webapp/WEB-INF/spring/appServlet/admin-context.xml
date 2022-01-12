@@ -13,7 +13,7 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven ></annotation-driven>
+	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -32,6 +32,7 @@
 	p:maxUploadSize="1048576"></beans:bean>
 	
 	<beans:bean class="com.koreait.funfume.util.FileManager" id="fileManager"/>
+	<beans:bean class="com.koreait.funfume.util.Pager" id="pager"/>
 	<beans:bean class= "com.koreait.funfume.aop.AdminExceptionAdvice" id="adminExceptionAdvice"/>
 	
 	<!-- 로그인 aop 설정 -->

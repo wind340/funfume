@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.koreait.funfume.domain.Brand;
 import com.koreait.funfume.domain.Note;
 import com.koreait.funfume.domain.Product;
 import com.koreait.funfume.exception.UploadException;
@@ -89,43 +90,72 @@ public class FileManager {
 		}
 		return filename;
 	}
-	
 	*/
 	
-	   public static String saveAsFile(HttpServletRequest request, Note note)throws UploadException {
-		      boolean result = false;
-		      MultipartFile multi= note.getNoteFile();
-		      
-		      
-		      String filename =null;
-		      System.out.println("getName():" + multi.getName()); //html name
-		      System.out.println("getFilename():" + multi.getOriginalFilename());
-		      
-		      //아직 컴포넌트 상태에서 파일이 메모리에 올라와 있기만 하므로, 실제 서버의 하드디스크에 저장해보자!!
-		      //jsp였다면 application 내장객체로 해결가능하겠으나, 현재는 그냥 스프링의 컨트롤러 일뿐이다..
-		      //해결책?? request - HttpServletRequest, session - HttpSession, application - ServletContext
-		      try {
-		         ServletContext application =request.getServletContext() ;
-		         String saveDir= application.getRealPath("/resources/data");
-		         System.out.println("realPath" + saveDir);
-		         filename= createFilename(multi.getOriginalFilename());
-		         File file = new File(saveDir+"/"+filename);//full path
-		         multi.transferTo(file);
-		         result=true;
-		      } catch (IllegalStateException e) {
-		         e.printStackTrace();
-		         result=false;
-		      } catch (IOException e) {
-		         e.printStackTrace();
-		         result=false;
-		      }
-		      if(result==false) {
-		         throw new UploadException("업로드 실패");
-		      }
-		      
-		      return filename;
-		   }
 	
+   public static String saveAsFile(HttpServletRequest request, Note note)throws UploadException {
+	      boolean result = false;
+	      MultipartFile multi= note.getNoteFile();
+	      
+	      
+	      String filename =null;
+	      System.out.println("getName():" + multi.getName()); //html name
+	      System.out.println("getFilename():" + multi.getOriginalFilename());
+	      
+	      //아직 컴포넌트 상태에서 파일이 메모리에 올라와 있기만 하므로, 실제 서버의 하드디스크에 저장해보자!!
+	      //jsp였다면 application 내장객체로 해결가능하겠으나, 현재는 그냥 스프링의 컨트롤러 일뿐이다..
+	      //해결책?? request - HttpServletRequest, session - HttpSession, application - ServletContext
+	      try {
+	         ServletContext application =request.getServletContext() ;
+	         String saveDir= application.getRealPath("/resources/data");
+	         System.out.println("realPath" + saveDir);
+	         filename= createFilename(multi.getOriginalFilename());
+	         File file = new File(saveDir+"/"+filename);//full path
+	         multi.transferTo(file);
+	         result=true;
+	      } catch (IllegalStateException e) {
+	         e.printStackTrace();
+	         result=false;
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	         result=false;
+	      }
+	      if(result==false) {
+	         throw new UploadException("업로드 실패");
+	      }
+	      
+	      return filename;
+	   }
+   
+   public static String saveAsFile(HttpServletRequest request, Brand brand) throws UploadException{
+	      boolean result = false;
+	      MultipartFile multi=brand.getImgFiles();
+	      
+	      String filename=null;
+	try {
+	      ServletContext application=request.getServletContext();
+	      String saveDir = application.getRealPath("/resources/data");
+	      System.out.println("saveDir is "+saveDir);
+	      filename= createFilename(multi.getOriginalFilename());
+	      File file = new File(saveDir+"/"+filename); //full path
+	         multi.transferTo(file); //물리적 저장!!!  (메모리 --> 하드)
+	         System.out.println("파일 업로드 완료");
+	         result=true;
+	      } catch (IllegalStateException e) {
+	         e.printStackTrace();
+	         result=false;
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	         result=false;
+	      }
+	      
+	      if(result==false) {
+	         throw new UploadException("파일업로드 실패");
+	      }
+	      return filename;
+	   }
+   
+
 	
 	//파일명 생성
 	public static String createFilename(String path) {

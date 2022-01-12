@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
+<select id="selectAll" resultType="Member">
+	select * from member order by member_id desc
+</select> 
 
-	<select id="selectAll">
-		select * from member
-	</select>
+<select id="select" parameterType="int" resultType="Member">
+	select * from member where member_id=#{member_id}
+</select>
+
+<!-- 로그인 하기위해서 비밀번호 이메일 비교 -->
+<select id="signIn" parameterType="Member" resultType="Member">
+	select * from member where email=#{email} and pass=#{pass}
+</select>
+
+<!-- 회원정보수정위해 비밀번호 비교 -->
+<select id="passCheck" parameterType="Member" resultType="Member">
+	select * from member where pass=#{pass}
+</select>
+
+<insert id="join" parameterType="Member">
+	insert into member(member_name, email, pass, addr1, addr2)
+	values(#{member_name},#{email},#{pass},#{addr1},#{addr2})
 	
-	<select id="select" parameterType="int" resultType="Member">
-		select * from member where member_id=#{member_id}
-	</select>
+	<selectKey keyColumn="member_id" order="AFTER" resultType="int" keyProperty="member_id">
+	select last_insert_id() as member_id 
+	</selectKey>
+</insert>
+
+<!-- 이메일 중복체크 -->
+<select id="emailCheck" parameterType="String" resultType="int">
+	select count(email) from member where email=#{email}
+</select>
+
+
+<update id="update" parameterType="Member">
+	update member set pass=#{pass}
+	,addr1=#{addr1},addr2=#{addr2}
+	where member_id=#{member_id}
+</update>
+
+<delete id="delete" parameterType="int">
+	delete from member where member_id=#{member_id}
+</delete>
+
+
 </mapper>

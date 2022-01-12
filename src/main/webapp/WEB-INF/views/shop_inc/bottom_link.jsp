@@ -19,24 +19,4 @@
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="/resources/funfume/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-
-<!--===============================================================================================-->
-	<script src="/resources/funfume/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
-
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
-<!--===============================================================================================-->
 	<script src="/resources/funfume/js/main.js"></script>

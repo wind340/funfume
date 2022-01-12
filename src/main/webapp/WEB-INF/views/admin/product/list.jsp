@@ -92,7 +92,7 @@
                     <%Product product = productList.get(curPos++); %>
                     <tr>
                       <td><%=num--%></td>
-                      <td><a href="/admin/product/detail?product_id=<%=product.getProduct_id()%>"><%=product.getProduct_name() %></a></td>
+                      <td><a href="/admin/product/detail2?product_id=<%=product.getProduct_id()%>"><%=product.getProduct_name() %></a></td>
                       <td><%=product.getPrice() %></td>
                     </tr>
                     <%} %>
@@ -102,6 +102,26 @@
                     	</td>
                     </tr>
                   </tbody>
+                   <tfoot>
+                   		<td colspan="8" align="center">
+						<%-- <% if(pager.getCurrentPage()-1>0){ %>
+								<a href="/admin/note/list.jsp?currentPage=<%=pager.getFirstPage()-1%>">이전페이지</a>
+							<%}else{ %>
+								<a href="javascript:alert('첫페이지입니다')"> 이전페이지</a>
+							<% } %> --%>
+							<%for(int i=pager.getFirstPage();i<=pager.getLastPage();i++){ %>
+								<%if(i>=pager.getTotalPage()+1)break;%>
+								<a href="/admin/product/list.jsp?currentPage=<%=i%>" <%if(i==pager.getCurrentPage()){ %> class="pageNum" <%}%>>
+									[<%=i%>]
+								</a>
+							<%}%>
+					     			<%-- <%if(pager.getLastPage()+1 > pager.getTotalPage()){ %>
+					             				<a href="javascript:alert('다음페이지가 없습니다')"></a>
+					             			<%} else{ %>
+								<a href="/admin/note/list.jsp?currentPage=<%=pager.getLastPage()+1%>">다음페이지</a>
+					             			<%} %> --%>
+             			</td>
+					</tfoot>                  
                 </table>
               </div>
               <!-- /.card-body -->

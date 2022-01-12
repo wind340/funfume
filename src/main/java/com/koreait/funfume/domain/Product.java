@@ -18,4 +18,11 @@ public class Product {
 	private MultipartFile[] imgFiles; //다중파일 업로드 때문에 배열로 준비해놓자
 	private List productImgs;
 	
+	private String[] uploadTopNotes;
+	private String[] uploadMiddleNotes;
+	private String[] uploadBaseNotes;
+	private String[] uploadAccords;
+	
+	
+	
 }

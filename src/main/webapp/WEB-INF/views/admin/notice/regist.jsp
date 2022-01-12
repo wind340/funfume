@@ -1,10 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>AdminLTE 3 | Noticeboard</title>
 	
 	<%@ include file="../../admin_inc/head_link.jsp" %>
   <!-- summernote -->
@@ -39,7 +39,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Noticeboard </li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -55,7 +55,7 @@
           <div class="col-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+                <h3 class="card-title">공지를 등록하세요</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -136,10 +136,12 @@ function regist(){
 			 content:$("textarea[name='content']").val()
 		 },
 		 success:function(result,status,xhr){
-			 alert(result);
-		 }
-		 
-	 });
+			 alert(result.msg);
+			 if(result.code==1){
+			 location.href="/admin/notice/list";
+			 }
+		}
+ 	});
 }
 
 </script>

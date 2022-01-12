@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+
+
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">

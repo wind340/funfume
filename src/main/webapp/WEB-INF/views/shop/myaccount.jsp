@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-
+<% Member nextval = (Member)session.getAttribute("member"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +35,7 @@
 				  <img src="resources/images/perfume_3.jpg" class="card-img-top" onClick="location.href='/mypage'">
 				  <div class="card-body">
 	  		    	 <ul class="list-group list-group-flush">
-				    	<h3 class="card-title" align="right" onClick="location.href='/mypage'">My Info</h3>
+				    	<h3 class="card-title" align="right">My Info</h3>
 					 </ul>
 				</div>
 	          </div>
@@ -65,11 +65,11 @@
 
 <script type="text/javascript">
 $(function(){
-	$("#mypage").click(function(){
-		mypage();
-	});
 	$("#orderlist").click(function(){
 		orderlist();
+	});
+	$("#mypage").click(function(){
+		mypage();
 	});
 })
  
@@ -77,7 +77,8 @@ function mypage(){
 	location.href="/mypage";
 }
 function orderlist(){
-	location.href="/ordersummary?member_id=1";
+	location.href="/ordersummary?member_id="+<%=nextval.getMember_id()%>;
+
 }
 
 </script>

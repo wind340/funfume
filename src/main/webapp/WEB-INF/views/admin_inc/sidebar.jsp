@@ -57,7 +57,7 @@
             <!-- 자식메뉴 begin -->
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/category/list" class="nav-link">
+                <a href="/admin/brand/list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>브랜드</p>
                 </a>
@@ -106,18 +106,16 @@
             </a>
             
             
-            <%for(int i=0;i<3;i++){%>
             <!-- 자식메뉴 begin -->
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/resources/admin/pages/layout/top-nav.html" class="nav-link">
+                <a href="/admin/member/list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
+                  <p>회원관리</p>
                 </a>
               </li>
             </ul>
             <!-- 자식메뉴 end -->
-            <%} %>
           </li>
           <!-- 주메뉴 end -->
           <!-- 주메뉴 begin -->
@@ -132,18 +130,16 @@
             </a>
             
             
-            <%for(int i=0;i<3;i++){%>
             <!-- 자식메뉴 begin -->
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/resources/admin/pages/layout/top-nav.html" class="nav-link">
+                <a href="/admin/order/list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
+                  <p>주문내역</p>
                 </a>
               </li>
             </ul>
             <!-- 자식메뉴 end -->
-            <%} %>
           </li>
           <!-- 주메뉴 end -->
           

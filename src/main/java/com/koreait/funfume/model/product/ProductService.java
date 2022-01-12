@@ -10,7 +10,10 @@ import com.koreait.funfume.domain.ProductImg;
 public interface ProductService {
 	public List selectAll();
 	public Product select(int product_id);
+	public List selectGender(int gender_id);
 	public void regist(Product product, List<ProductImg> productImgList);
 	public void update(Product product,List<ProductImg> productImgList);
 	public void delete(int product_id);
+	
+	
 }

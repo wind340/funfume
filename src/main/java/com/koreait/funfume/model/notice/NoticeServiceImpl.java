@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.koreait.funfume.domain.Notice;
 import com.koreait.funfume.domain.Product;
+import com.koreait.funfume.exception.NoticeException;
 
 /**
  * @author easyd
@@ -33,17 +34,17 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public void insert(Notice notice) {
+	public void insert(Notice notice) throws NoticeException{
 		noticeDAO.insert(notice);
 	}
 
 	@Override
-	public void update(Notice notice) {
+	public void update(Notice notice) throws NoticeException{
 		noticeDAO.update(notice);
 	}
 
 	@Override
-	public void delete(int notice_id) {
+	public void delete(int notice_id) throws NoticeException{
 		noticeDAO.delete(notice_id);
 	}
 

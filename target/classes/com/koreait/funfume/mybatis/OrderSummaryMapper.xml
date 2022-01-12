@@ -16,6 +16,11 @@
 		where m.member_id=os.member_id and py.paymethod_id=os.paymethod_id
 	</sql>
 	
+	<select id="adminSelectAll" parameterType="int" resultMap="JoinSummaryPaymethod">
+	<include refid="selectSummary"/>
+			order by orderdate desc
+	</select>
+	
 	<!--member_id로 주문 목록가져오기 -->
 	<select id="selectAll" parameterType="int" resultMap="JoinSummaryPaymethod">
 		<include refid="selectSummary"/>

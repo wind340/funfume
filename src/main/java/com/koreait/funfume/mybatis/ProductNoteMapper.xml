@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductNote">
+	
+	<insert id="insert" parameterType="ProductNote">
+		insert into product_note(product_id,note_id,note_place)
+		values(#{product_id},#{note_id},#{note_place})
+	</insert>
+	
+	<select id="selectAll" resultType="ProductNote">
+		select * from product_note;
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from product_note where product_id=#{product_id}
+	</delete>
+</mapper>

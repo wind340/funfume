@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Brand">
+
+
+	<select id="selectAll" resultType="Brand">
+		select * from brand
+	</select>	
+	
+	<!-- 게시물 한건 가져오기 -->
+	<select id="select" parameterType="int" resultType="Brand">
+		select * from brand where brand_id=#{brand_id}
+	</select>
+	
+	<insert id="insert" parameterType="Brand">
+		insert into brand(brand_name,brand_img)
+		values(#{brand_name}, #{brand_img})
+		<selectKey keyColumn="brand_id" order="AFTER" resultType="int" keyProperty="brand_id">
+			select last_insert_id() as brand_id
+		</selectKey>
+	</insert>
+	
+	<update id="update" parameterType="Brand">
+		update brand set brand_name=#{brand_name}, brand_img=#{brand_img}
+		where brand_id=#{brand_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from brand where brand_id=#{brand_id}
+	</delete>
+	
+</mapper>

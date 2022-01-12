@@ -20,6 +20,10 @@
 	select * from product where product_id=#{product_id}
 </select>
 
+<select id="selectGender" parameterType="int" resultMap="JoinProductProdictImg">
+	select * from product where gender_id=#{gender_id}
+</select>
+
 <insert id="insert" parameterType="Product">
 	insert into product(brand_id, gender_id, product_name, price, introduction)
 	values(#{brand_id},#{gender_id},#{product_name},#{price},#{introduction})

@@ -1,4 +1,11 @@
+<%@page import="com.koreait.funfume.domain.Accord"%>
+<%@page import="com.koreait.funfume.domain.Note"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%
+List<Note> noteList = (List)request.getAttribute("noteList");
+List<Accord> accordList = (List)request.getAttribute("accordList");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

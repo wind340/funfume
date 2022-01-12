@@ -111,9 +111,10 @@
 <script>
 
 $(function () {
-    $("#bt_update").click(function(){
-    	update();
+	$("#bt_update").click(function(){
+    	update(); 
     });
+    
   })
   
 function update(){
@@ -123,6 +124,7 @@ function update(){
 		form1.submit();
 	}
   }
+
 
 
 </script>

@@ -1,11 +1,9 @@
-<%@page import="com.koreait.funfume.domain.ProductImg"%>
+<%@page import="com.koreait.funfume.domain.Gender"%>
 <%@page import="com.koreait.funfume.domain.Product"%>
-<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<% 	
-	List<Product> productList = (List)request.getAttribute("productList");//상품목록
+<%
+	List<Product> product = (List)request.getAttribute("productList");
 %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,35 +19,26 @@
 	<!-- Cart -->
 <%@ include file="../shop_inc/cart.jsp" %>
 	
-	
-		
+
 	<!-- Product -->
-<div class="bg0 m-t-23 p-b-140">
+<section class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+					<button onClick="productList()" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
 						All Products
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+					<button onClick="getGenderList(2)" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
 						Women
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+					<button onClick="getGenderList(1)" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
 						Men
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-						Bag
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-						Shoes
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-						Watches
+					<button onClick="getGenderList(3)" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
+						Unisex
 					</button>
 				</div>
 
@@ -267,58 +256,105 @@
 					</div>
 				</div>
 			</div>
-
-		<!-- 상품 목록 가져오기 -->
-			<div class="row" name="poductList">
-	            <%for(Product product : productList){ %>
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
-					<!-- Block2 -->
-					<div class="block2">
-						<div class="block2-pic hov-img0">
-						<%ProductImg productImg=(ProductImg)product.getProductImgs().get(0);%>
-							<img src="/resources/data/<%=productImg.getImg() %>" width="200" height="350">
-						</div>
-
-						<div class="block2-txt flex-w flex-t p-t-14">
-							<div class="block2-txt-child1 flex-col-l ">
-								<a href="/product-detail?product_id=<%=product.getProduct_id() %>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									<%=product.getProduct_name() %>
-								</a>
-
-								<span class="stext-105 cl3">
-									￦<%=product.getPrice() %>
-
-								</span>
-							</div>
-
-							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="/resources/funfume/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="/resources/funfume/images/icons/icon-heart-02.png" alt="ICON">
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<%} %>
-
+	
+			<!-- 상품 목록 가져오기 -->
+			<div  class="row" id="dataList">
+			
 			</div>
 	</div>
-</div>
-
+</section>
 
 	<!-- Footer -->
 <%@ include file="../shop_inc/footer.jsp" %>
 	<!-- Back to top -->
 <%@ include file="../shop_inc/back_to_top.jsp" %>
 	<!-- Modal1 -->
-<%@ include file="../shop_inc/modal1.jsp" %>
 	<!-- Bottom_link -->
 <%@ include file="../shop_inc/bottom_link.jsp" %>
 	<!-- Bottom_link 2 -->
 <%@ include file="../shop_inc/bottom_link2.jsp" %>
 
 
+<script type="text/javascript">
+$(function(){
+	productList();
+	var n= <%=product.get(0).getGender_id()%>;
+	getGenderList(n);
+});
+//서버에 비동기 요청으로 게시물 목록 가져오기(json배열로)
+function getGenderList(n){
+	$.ajax({
+		url:"/genderList?gender_id="+n,
+		type:"get",
+		success:function(result,status,xhr){
+			console.log(result);
+			var tag="";
+			for(var i=0; i<result.length;i++){
+				var json=result[i];
+				tag+="<div class='col-sm-6 col-md-4 col-lg-3 p-b-35'>";
+				tag+="<div class='block2'>";
+				tag+="<div class='block2-pic hov-img0'>";
+				tag+="<img src='/resources/data/"+json.productImgs[0].img+"' width='200' height='350'>";
+				tag+="</div>";
+				tag+="<div class='block2-txt flex-w flex-t p-t-14'>";
+				tag+="<div class='block2-txt-child1 flex-col-l '>";
+				tag+="<a href='/product-detail?product_id="+json.product_id+"' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>";
+				tag+=json.product_name+"</a>";
+				tag+="<span class='stext-105 cl3'>";
+				tag+="￦"+json.price;
+				tag+="</span>";
+				tag+="</div>";
+				tag+="<div class='block2-txt-child2 flex-r p-t-3'>";
+				tag+="<a href=''#' class='btn-addwish-b2 dis-block pos-relative js-addwish-b2'>";
+				tag+="<img class='icon-heart1 dis-block trans-04' src='/resources/funfume/images/icons/icon-heart-01.png' alt='ICON'>";
+				tag+="<img class='icon-heart2 dis-block trans-04 ab-t-l' src='/resources/funfume/images/icons/icon-heart-02.png' alt='ICON'>";
+				tag+="</a>";
+				tag+="</div>";
+				tag+="</div>";
+				tag+="</div>";
+				tag+="</div>";
+
+			}
+			$("#dataList").html(tag);
+		}
+	});
+}
+function productList(){
+	$.ajax({
+		url:"/productList",
+		type:"get",
+		success:function(result,status,xhr){
+			console.log(result);
+			var tag="";
+			for(var i=0; i<result.length;i++){
+				var json=result[i];
+				tag+="<div class='col-sm-6 col-md-4 col-lg-3 p-b-35'>";
+				tag+="<div class='block2'>";
+				tag+="<div class='block2-pic hov-img0'>";
+				tag+="<img src='/resources/data/"+json.productImgs[0].img+"' width='200' height='350'>";
+				tag+="</div>";
+				tag+="<div class='block2-txt flex-w flex-t p-t-14'>";
+				tag+="<div class='block2-txt-child1 flex-col-l '>";
+				tag+="<a href='/product-detail?product_id="+json.product_id+"' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>";
+				tag+=json.product_name+"</a>";
+				tag+="<span class='stext-105 cl3'>";
+				tag+="￦"+json.price;
+				tag+="</span>";
+				tag+="</div>";
+				tag+="<div class='block2-txt-child2 flex-r p-t-3'>";
+				tag+="<a href=''#' class='btn-addwish-b2 dis-block pos-relative js-addwish-b2'>";
+				tag+="<img class='icon-heart1 dis-block trans-04' src='/resources/funfume/images/icons/icon-heart-01.png' alt='ICON'>";
+				tag+="<img class='icon-heart2 dis-block trans-04 ab-t-l' src='/resources/funfume/images/icons/icon-heart-02.png' alt='ICON'>";
+				tag+="</a>";
+				tag+="</div>";
+				tag+="</div>";
+				tag+="</div>";
+				tag+="</div>";
+			}
+			$("#dataList").html(tag);
+		}
+	});
+}
+</script>
 </body>
 </html>

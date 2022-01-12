@@ -49,5 +49,11 @@ public class MybatisProductDAO implements ProductDAO {
 			throw new UploadException("상품 삭제 실패");
 		}		
 	}
+	
+	@Override
+	public List selectGender(int gender_id) {
+		return sessionTemplate.selectList("Product.selectGender", gender_id);
+	}
+
 
 }

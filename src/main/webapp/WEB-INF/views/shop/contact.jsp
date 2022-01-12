@@ -108,9 +108,15 @@
 
 
 	<!-- Back to top -->
-<%@ include file="../shop_inc/back_to_top.jsp" %>
-	<!-- bottom_link -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
 <%@ include file="../shop_inc/bottom_link.jsp" %>
+<!--===============================================================================================-->
+	<script src="/resources/funfume/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 
 <!--===============================================================================================-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>

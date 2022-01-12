@@ -17,7 +17,7 @@
 	</insert>
 
 	<update id="update" parameterType="Notice">
-		update set notice title=#{title},writer=#{writer},content=#{content}
+		update notice set title=#{title},writer=#{writer},content=#{content}
 		where notice_id=  #{notice_id}
 	</update>
 
