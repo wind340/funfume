@@ -21,6 +21,7 @@ import com.koreait.funfume.exception.UploadException;
 @Repository
 public class MybatisProductNoteDAO implements ProductNoteDAO{
 	
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	

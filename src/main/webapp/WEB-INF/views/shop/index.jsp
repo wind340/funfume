@@ -62,7 +62,7 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1" >
 									Sweet & Calm
 								</h2>
 							</div>
@@ -80,13 +80,13 @@
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
-								<span class="ltext-101 cl2 respon2">
+								<span class="ltext-101 cl2 respon2" style="color:#FFA7A7;">
 									S/S season Collection 2022
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1" style="color:#FFA7A7;">
 									New arrivals
 								</h2>
 							</div>
@@ -120,7 +120,7 @@
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
-									Spring Summer 2022
+									Spring 2022
 								</span>
 							</div>
 
@@ -145,7 +145,7 @@
 								</span>
 
 								<span class="block1-info stext-102 trans-04">
-									Spring Summer 2022
+									Spring 2022
 								</span>
 							</div>
 
@@ -164,12 +164,12 @@
 						<img src="/resources/images/unisex2.jpg" alt="IMG-BANNER">
 						<a href="/product-gender?gender_id=3" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
+								<span class="block1-name ltext-102 trans-04 p-b-8" style="color:#ECC6C0;">
 									Unisex
 								</span>
 
-								<span class="block1-info stext-102 trans-04">
-									New Trend
+								<span class="block1-info stext-102 trans-04" style="color:#ECC6C0;">
+									Spring 2022
 								</span>
 							</div>
 
@@ -437,7 +437,7 @@
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 						<%ProductImg productImg=(ProductImg)product.getProductImgs().get(0);%>
-							<img src="/resources/data/<%=productImg.getImg() %>" alt="IMG-PRODUCT">
+							<img src="/resources/data/<%=productImg.getImg() %>" width='300' height='340'>
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">

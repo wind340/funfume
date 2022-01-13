@@ -8,6 +8,7 @@ import com.koreait.funfume.domain.Member;
 
 @Service
 public interface MemberService {
+	
 	public List selectAll(); //모든회원목록
 	public Member signIn(Member member); 
 	public Member select(int member_id);

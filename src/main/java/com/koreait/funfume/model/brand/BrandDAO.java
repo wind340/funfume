@@ -5,6 +5,7 @@ import java.util.List;
 import com.koreait.funfume.domain.Brand;
 
 public interface BrandDAO {
+	
 	public List selectAll();
 	public Brand select(int brand_id); //한건 가져오기
 	public void insert(Brand brand);

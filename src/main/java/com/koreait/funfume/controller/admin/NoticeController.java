@@ -12,6 +12,8 @@ import com.koreait.funfume.domain.Notice;
 import com.koreait.funfume.model.notice.NoticeService;
 @Controller
 public class NoticeController {
+	
+	
 	@Autowired
 	private NoticeService noticeService;
 	

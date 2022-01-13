@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class OrderSummary {
+	
+	
 	private int order_summary_id;
 	private int member_id;
 	private int paymethod_id;

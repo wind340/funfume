@@ -14,6 +14,7 @@ import com.koreait.funfume.exception.ProductImgException;
 @Repository
 public class MybatisProductImgDAO implements ProductImgDAO{
 	
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	

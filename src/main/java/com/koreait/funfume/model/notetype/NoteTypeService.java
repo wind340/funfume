@@ -6,6 +6,7 @@ import com.koreait.funfume.domain.NoteType;
 
 public interface NoteTypeService {
 	
+	
 	public List selectAll();
 	public NoteType select(int note_type_id);
 	public void insert(NoteType noteType);

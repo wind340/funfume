@@ -13,6 +13,7 @@ import com.koreait.funfume.exception.UploadException;
 @Repository
 public class MybatisNoteTypeDAO implements NoteTypeDAO {
 	
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	

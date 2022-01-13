@@ -12,6 +12,7 @@ import com.koreait.funfume.domain.Gender;
  *
  */
 public interface GenderService {
+	
 	public List selectAll();
 	public Gender select(int gender_id);
 	public void insert(Gender gender);

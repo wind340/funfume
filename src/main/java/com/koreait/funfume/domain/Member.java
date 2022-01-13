@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class Member {
+	
+	
 	private int member_id;
 	private String member_name;
 	private String email;

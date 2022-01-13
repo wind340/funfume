@@ -6,6 +6,7 @@ import com.koreait.funfume.domain.Product;
 
 
 public interface NoticeService {
+	
 	public List selectAll();
 	public Notice select(int notice_id);
 	public void insert(Notice notice);

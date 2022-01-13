@@ -2,7 +2,6 @@ package com.koreait.funfume.exception;
 
 public class NoteTypeException extends RuntimeException{
 	
-	
 	public NoteTypeException(String msg) {
 		super(msg);
 	}

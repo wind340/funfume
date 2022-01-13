@@ -13,6 +13,7 @@ import com.koreait.funfume.exception.UploadException;
 @Repository
 public class MybatisBrandDAO implements BrandDAO{
 
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 

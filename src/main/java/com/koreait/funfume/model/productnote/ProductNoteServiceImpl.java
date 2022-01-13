@@ -19,6 +19,7 @@ import com.koreait.funfume.exception.ProductNoteException;
 @Service
 public class ProductNoteServiceImpl implements ProductNoteService {
 	
+	
 	@Autowired
 	private ProductNoteDAO productNoteDAO;
 

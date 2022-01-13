@@ -5,6 +5,7 @@ import java.util.List;
 import com.koreait.funfume.domain.Note;
 
 public interface NoteDAO {
+	
 	public List selectAll();
 	public List selectType(int note_type_id);
 	public Note select(int note_id);

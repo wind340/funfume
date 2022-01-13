@@ -8,6 +8,8 @@ import lombok.Data;
 
 @Data
 public class Product {
+	
+	
 	private int product_id;
 	
 	private int brand_id;//fk  Brand

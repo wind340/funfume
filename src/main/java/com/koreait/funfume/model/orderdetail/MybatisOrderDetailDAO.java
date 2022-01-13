@@ -12,6 +12,7 @@ import com.koreait.funfume.exception.OrderException;
 @Repository
 public class MybatisOrderDetailDAO implements OrderDetailDAO{
 	
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 

@@ -75,7 +75,7 @@
 							</p>
 
 							<span class="stext-111 cl8">
-								- Steve Jobâs 
+								- Steve Jobas 
 							</span>
 						</div>
 					</div>

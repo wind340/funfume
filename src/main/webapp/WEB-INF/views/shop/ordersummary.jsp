@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
-List<OrderSummary> orderSummaryList = (List)request.getAttribute("orderSummaryList");
+	List<OrderSummary> orderSummaryList = (List)request.getAttribute("orderSummaryList");
 %>
 
 <!DOCTYPE html>
@@ -58,7 +58,7 @@ List<OrderSummary> orderSummaryList = (List)request.getAttribute("orderSummaryLi
 								<tr class="table_row"  align="center">
 									<td><%=i++%></td>
 									<td><%=ordersummary.getTotalpay() %>원</td>
-									<td><%= paymethod.getMethod() %></td>
+									<td><%=paymethod.getMethod() %></td>
 									<td><%=ordersummary.getOrderdate() %></td>
 									<td><button type="button" onClick="detail(<%=ordersummary.getOrder_summary_id()%>)" class="btn btn-outline-secondary" > view </button></td>
 									<% } %>

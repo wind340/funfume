@@ -18,6 +18,7 @@ import com.koreait.funfume.exception.NoticeException;
  */
 @Service
 public class NoticeServiceImpl implements NoticeService {
+	
 
 	@Autowired
 	private NoticeDAO noticeDAO;

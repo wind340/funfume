@@ -13,6 +13,7 @@ import com.koreait.funfume.exception.UploadException;
 @Repository
 public class MybatisMemberDAO implements MemberDAO{
 
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	

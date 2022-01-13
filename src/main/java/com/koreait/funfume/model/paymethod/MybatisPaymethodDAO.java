@@ -10,6 +10,7 @@ import com.koreait.funfume.domain.Paymethod;
 
 @Repository
 public class MybatisPaymethodDAO implements PaymethodDAO{
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	

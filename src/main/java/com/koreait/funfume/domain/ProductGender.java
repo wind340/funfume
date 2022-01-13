@@ -11,6 +11,8 @@ import lombok.Data;
  */
 @Data
 public class ProductGender {
+	
+	
 	private int product_gender_id;
 	private int product_id;
 	private int gender_id;

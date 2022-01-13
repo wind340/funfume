@@ -17,6 +17,7 @@ import com.koreait.funfume.domain.Review;
 @Service
 public class ReviewServiceImpl implements ReviewService {
 	
+	
 	@Autowired
 	private ReviewDAO reviewDAO;
 

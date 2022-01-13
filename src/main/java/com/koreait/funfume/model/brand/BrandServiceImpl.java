@@ -10,6 +10,7 @@ import com.koreait.funfume.exception.BrandException;
 
 @Service
 public class BrandServiceImpl implements BrandService{
+	
 	@Autowired
 	private BrandDAO brandDAO;
 

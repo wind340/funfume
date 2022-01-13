@@ -10,16 +10,14 @@
 <%@page import="com.koreait.funfume.domain.Product"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <% Product product= (Product)request.getAttribute("product");
-List<Product> productList = (List)request.getAttribute("productList");
-List<Note> noteList = (List)request.getAttribute("noteList");
-List<Accord> accordList = (List)request.getAttribute("accordList");
-List<Gender> genderList = (List)request.getAttribute("genderList");
-List<Brand> brandList = (List)request.getAttribute("brandList");
-List<ProductNote> productNoteList = (List)request.getAttribute("productNoteList");
-List<ProductAccord> productAccordList = (List)request.getAttribute("productAccordList");
-List<ProductGender> productGenderList = (List)request.getAttribute("productGenderList");
-
-
+	List<Product> productList = (List)request.getAttribute("productList");
+	List<Note> noteList = (List)request.getAttribute("noteList");
+	List<Accord> accordList = (List)request.getAttribute("accordList");
+	List<Gender> genderList = (List)request.getAttribute("genderList");
+	List<Brand> brandList = (List)request.getAttribute("brandList");
+	List<ProductNote> productNoteList = (List)request.getAttribute("productNoteList");
+	List<ProductAccord> productAccordList = (List)request.getAttribute("productAccordList");
+	List<ProductGender> productGenderList = (List)request.getAttribute("productGenderList");
 %>
 <!DOCTYPE html>
 <html lang="en">

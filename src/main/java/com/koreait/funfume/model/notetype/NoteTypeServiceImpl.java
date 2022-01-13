@@ -11,6 +11,7 @@ import com.koreait.funfume.exception.NoteTypeException;
 @Service
 public class NoteTypeServiceImpl implements NoteTypeService{
 	
+	
 	@Autowired
 	private NoteTypeDAO noteTypeDAO;
 	

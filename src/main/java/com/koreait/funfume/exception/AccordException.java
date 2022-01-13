@@ -2,7 +2,6 @@ package com.koreait.funfume.exception;
 
 public class AccordException extends RuntimeException{
 	
-	
 	public AccordException(String msg) {
 		super(msg);
 	}

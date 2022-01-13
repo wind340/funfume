@@ -8,6 +8,7 @@ import com.koreait.funfume.domain.Accord;
 
 @Service
 public interface AccordService {
+	
 	public List selectAll();
 	public Accord select(int accord_id);
 	public void regist(Accord accord);

@@ -11,6 +11,8 @@ import lombok.Data;
  */
 @Data
 public class Gender {
+	
+	
 	private int gender_id;
 	private String gender_name;
 }

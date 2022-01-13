@@ -12,6 +12,7 @@ import com.koreait.funfume.exception.NoteException;
 @Repository
 public class MybatisNoteDAO implements NoteDAO{
 	
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	

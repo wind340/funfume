@@ -19,6 +19,7 @@ import com.koreait.funfume.exception.NoticeException;
  */
 @Repository
 public class MybatisNoticeDAO implements NoticeDAO {
+	
 
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;

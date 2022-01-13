@@ -1,7 +1,5 @@
 package com.koreait.funfume.controller.shop;
 
-import java.net.http.HttpHeaders;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +25,8 @@ import com.koreait.funfume.util.Message;
 
 @Controller
 public class LoginController {
+	
+	
 	@Autowired
 	MemberService memberService;
 	@Autowired

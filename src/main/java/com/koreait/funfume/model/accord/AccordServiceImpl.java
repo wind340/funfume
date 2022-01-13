@@ -10,6 +10,7 @@ import com.koreait.funfume.domain.Accord;
 @Service
 public class AccordServiceImpl implements AccordService{
 
+	
 	@Autowired
 	private AccordDAO accordDAO;
 	

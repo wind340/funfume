@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class OrderDetail {
+	
+	
 	private int order_detail_id;
 	private int ea;
 	private int order_summary_id;

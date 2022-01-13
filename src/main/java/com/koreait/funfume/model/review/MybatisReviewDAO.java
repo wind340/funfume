@@ -18,6 +18,7 @@ import com.koreait.funfume.domain.Review;
 @Repository
 public class MybatisReviewDAO  implements ReviewDAO{
 	
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 

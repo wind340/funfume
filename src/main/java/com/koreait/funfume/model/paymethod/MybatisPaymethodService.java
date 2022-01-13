@@ -10,6 +10,7 @@ import com.koreait.funfume.domain.Paymethod;
 @Service
 public class MybatisPaymethodService implements PaymethodService{
 	
+	
 	@Autowired
 	private PaymethodDAO paymethodDAO;
 	

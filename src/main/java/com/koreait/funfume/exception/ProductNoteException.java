@@ -2,7 +2,6 @@ package com.koreait.funfume.exception;
 
 public class ProductNoteException extends RuntimeException{
 	
-	
 	public ProductNoteException(String msg) {
 		super(msg);
 	}

@@ -11,6 +11,7 @@ import com.koreait.funfume.exception.MemberException;
 @Service
 public class MemberServiceImpl implements MemberService{
 
+	
 	@Autowired
 	private MemberDAO memberDAO;
 	

@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.Model;import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.koreait.funfume.domain.Accord;
 import com.koreait.funfume.domain.Member;
 import com.koreait.funfume.model.member.MemberService;
 import com.koreait.funfume.util.HashBuilder;
@@ -24,7 +26,6 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private Pager pager;
-	
 	@Autowired
 	private HashBuilder hashBuilder;
 	
@@ -39,7 +40,7 @@ public class MemberController {
 	}
 
 	//업데이트 폼 요청
-    @RequestMapping(value="/member/updateForm" ,method=RequestMethod.GET) 
+    @RequestMapping(value="/member/updateForm",method=RequestMethod.GET) 
     public ModelAndView updateForm(int member_id) { 
 	    Member member = memberService.select(member_id); 
 	    ModelAndView mav = new ModelAndView();
@@ -49,7 +50,7 @@ public class MemberController {
 	    return mav;
     }
     
-    @RequestMapping(value="/member/update" , method=RequestMethod.POST) 
+    @RequestMapping(value="/member/update", method=RequestMethod.POST) 
     public String update(HttpServletRequest request, Member member) {
   
 	  memberService.update(member);

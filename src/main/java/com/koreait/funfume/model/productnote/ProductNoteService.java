@@ -13,6 +13,7 @@ import com.koreait.funfume.domain.ProductNote;
  *
  */
 public interface ProductNoteService {
+	
 	public List selectAll();
 	public Product select(int product_note_id);
 	public void insert(ProductNote productNote);
