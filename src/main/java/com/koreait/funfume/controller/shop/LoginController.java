@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,7 @@ public class LoginController {
 		
 		//서비스에 일 시키기 전에 , 비밀번호 hash값으로 변환해서 비교.
 		//db의 hash값과 , 변환한 hash값이 틀린경우 인증실패.
-	
+		
 		String pass = hashBuilder.convertStringToHash(member.getPass());
 		member.setPass(pass);
 		
@@ -77,8 +78,9 @@ public class LoginController {
 	@ExceptionHandler(MemberException.class) 
 	@ResponseBody
 	public ResponseEntity<Message> handle(MemberException e) {
-		org.springframework.http.HttpHeaders header = new org.springframework.http.HttpHeaders();
-		header.add("Content-Type","text/html;charset=utf8");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type", "text/html;charset=utf-8");
+	
 		//한글 및 제대로된 응답정보를 구성하려면, ResponseEntity header,body { code:1,msg:"실패입니다" }  <-이런 구조화된 형태를 응답해주자
 		//Gson을 직접써도되지만, 로드존슨이 이미 자동으로 json으로 변환하는 내부적 처리를 했다.   객체 -->JSON
 		Message message = new Message();
@@ -113,6 +115,9 @@ public class LoginController {
 	// 가입회원 비밀번호 암호화
 	@RequestMapping(value="/join" ,method = RequestMethod.POST)
 	public String join(Member member) throws Exception{
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type", "text/html;charset=utf-8");
+	
 		System.out.println(member.getAddr1());          
 		System.out.println(member.getAddr2());          
 		String pass=hashBuilder.convertStringToHash(member.getPass());

@@ -1,12 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="kor">
 <head>
-<meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FUNFUME | 회원가입</title>
 <%@ include file="../shop_inc/head_link.jsp"%>	
+
 </head>
-<body>
+<body class="animsition">
 	<!-- Header -->
 <%@ include file="../shop_inc/header.jsp" %>
 
@@ -48,6 +50,7 @@
 		</div>
 	</section>	
 </form>
+
 
 
 	<!-- Footer -->
@@ -97,12 +100,10 @@ function join(){
 		$("form[name='form1']").attr({
 			action:"/join",
 			method:"post",
-			contentType: 'application/x-www-form-urlencoded; charset=euc-kr'
 		});
 			
 		$("form[name='form1']").submit();
 		alert("회원가입이 완료되었습니다. 로그인해주세요");
-	
 	}
 }
 
@@ -110,8 +111,8 @@ function checkMail(){
 	var email = $("input[name='email']").val();
 	
 	$.ajax({
-		url:'/emailCheck',
-		type:'post',
+		url:"/emailCheck",
+		type:"POST",
 		data:{email:email},
 		success:function(result){
 			if(result!=0){

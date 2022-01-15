@@ -7,9 +7,10 @@
 	Pager pager = (Pager)request.getAttribute("pager"); //페이징 처리객체
 %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FUNFUME | admin</title>
 	
 <%@ include file="../../admin_inc/head_link.jsp" %>

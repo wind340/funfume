@@ -12,16 +12,16 @@
 </resultMap>
 
 <select id="selectAll" resultMap="JoinProductProdictImg">
-	select * from product
+	select * from product order by product_id desc
 </select>
 
 
 <select id="select" parameterType="int" resultMap="JoinProductProdictImg">
-	select * from product where product_id=#{product_id}
+	select * from product where product_id=#{product_id} order by product_id desc
 </select>
 
 <select id="selectGender" parameterType="int" resultMap="JoinProductProdictImg">
-	select * from product where gender_id=#{gender_id}
+	select * from product where gender_id=#{gender_id} order by product_id desc
 </select>
 
 <insert id="insert" parameterType="Product">

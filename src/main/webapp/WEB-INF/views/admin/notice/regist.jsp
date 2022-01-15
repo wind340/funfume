@@ -7,10 +7,6 @@
   <title>AdminLTE 3 | Noticeboard</title>
 	
 	<%@ include file="../../admin_inc/head_link.jsp" %>
-  <!-- summernote -->
-  <link rel="stylesheet" href="/resources/admin/plugins/summernote/summernote-bs4.min.css">
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -38,7 +34,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="/admin/main">Home</a></li>
               <li class="breadcrumb-item active">Noticeboard </li>
             </ol>
           </div><!-- /.col -->
@@ -127,8 +123,16 @@ $(function () {
 
 function regist(){
 	 //비동기방식으로 글등록 요청을 시도하자!!
+		if($("input[name='title']").val()==""){
+			alert("제목 입력은 필수입니다");
+			return;	
+		}
+		if($("input[name='writer']").val()==""){
+			alert("작성자 입력은 필수입니다");
+			return;
+		}
 	 $.ajax({
-		 url:"/admin/rest/notice",
+		 url:"/admin/notice/regist",
 		 type:"post",
 		 data:{
 			 title:$("input[name='title']").val(),
@@ -136,10 +140,8 @@ function regist(){
 			 content:$("textarea[name='content']").val()
 		 },
 		 success:function(result,status,xhr){
-			 alert(result.msg);
-			 if(result.code==1){
+			 alert("등록되었습니다");
 			 location.href="/admin/notice/list";
-			 }
 		}
  	});
 }

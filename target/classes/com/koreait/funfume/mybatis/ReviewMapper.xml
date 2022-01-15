@@ -11,6 +11,9 @@
 		select * from review where product_id=#{product_id}
 	</select>
 	
+	<delete id="delete" parameterType="int">
+		delete from review where 	review_id=#{review_id}
+	</delete>
 	
 	
 
