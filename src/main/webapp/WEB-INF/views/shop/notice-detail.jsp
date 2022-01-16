@@ -10,10 +10,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-div#notice{
- text-align: center;
- margin: auto;
+div#notice1{
+	text-align: center;
+	margin: auto;
+	border-radius: 25px;
+	border: 1px solid #CCA63D;
+	padding: auto;
+	width: 80%;
+	height: 40%;
 }
+div#grid{
+	border-top: 1px solid #CCA63D;
+}
+div#grid2{
+	border-right: 1px solid #CCA63D;
+}
+div#content {
+            width: 100%;
+            height: 200px;
+			border-top: 1px solid #CCA63D;
+			border-bottom: 1px solid #CCA63D;
+            box-sizing: border-box;
+            padding: 15px;
+            font-size: 15px;
+            resize: none;
+ }
 </style>
 <%@ include file="../shop_inc/head_link.jsp"%>
 </head>
@@ -34,31 +55,25 @@ div#notice{
 
 
 	<!--  My page "resources/images/slide-01.jpg"   -->
-	<form name="form1">
-	<div class="row row-cols-1 row-cols-md-5" id="notice" align="center">
-		<div class="card border-secondary mb-2" style="max-width: 18rem;">
- 				<div class="card-header">작성일</div>
- 				<div class="card-body text-secondary">
-   					<h5 class="card-title"><%=notice.getRegdate()%></h5>
-  				</div>
+<div id="notice1" class="pt-100">
+<form name="form1">
+	<div class="form-row">
+		<div class="col-md-6" id="grid2">
+			<label for="inputEmail4">작성자</label>
+			<p><%=notice.getWriter() %></p>
 		</div>
-		<div class="card border-secondary mb-2" style="max-width: 18rem;">
-  				<div class="card-header">작성자</div>
-  				<div class="card-body text-secondary">
-   					<h5 class="card-title"><%=notice.getWriter() %></h5>
-  				</div>
+	    <div class="col-md-6">
+			<label for="inputPassword4">작성일</label>
+			<p><%=notice.getRegdate()%></p>
+	    </div>
 		</div>
-	    	
-	    	<%-- <input type="text" name="title" placeholder="<%=notice.getTitle() %>" readonly="readonly">
-	    	<label> 작성자 </label>
-	    	<input type="text" name="title" placeholder="<%=notice.getWriter() %>" readonly="readonly">
-	    	<label> 작성일 </label>
-	    	<input type="text" name="title" placeholder="<%=notice.getRegdate()%>" readonly="readonly">
-	    	<label> 내용 </label>
-	    	<textarea id="subject" name="subject" style="height:200px"><%=notice.getContent() %></textarea> --%>
-	</div>
+		<div id="grid" class="form-group">
+			<label for="inputAddress">내용</label>
+			<div id="content"><%=notice.getContent() %></div>
+		</div>
+  		<button type="button" class="btn btn-dark" onClick="history.back()">돌아가기</button>
 	</form>
-
+</div>
 <!-- Footer -->
 <%@ include file="../shop_inc/footer.jsp"%>
 <!-- Back to top -->
