@@ -11,6 +11,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@ include file="../shop_inc/head_link.jsp"%>	
+<style>
+div#notice_wrapper{
+ text-align: center;
+ margin: auto;
+}
+
+th {
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  text-align: center;
+}
+</style>
 </head>
 <body class="animsition">
 
@@ -34,7 +47,7 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
-        <div class="row">
+        <div class="row" id="notice_wrapper">
           <div class="col-12">
             <div class="card card-info">
               <div class="card-header" >
@@ -43,13 +56,12 @@
               </div>
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
-                  <thead>
+                  <thead align="center">
                     <tr>
                       <th>No</th>
-                      <th>제목</th>
+                      <th class="col-6">제목</th>
                       <th>작성자</th>
                       <th>등록일</th>
-                      <th>조회수</th>
                     </tr>
                   </thead>
                   <tbody id="dataList"></tbody>
@@ -59,7 +71,7 @@
           </div>
         </div>
     </section>
- 	
+
 		
 	<!-- Footer -->
 <%@ include file="../shop_inc/footer.jsp" %>
@@ -84,13 +96,14 @@ function getList(){
 			var tag="";
 			for( var i =0; i<result.length;i++){
 				var json=result[i]; //배열에서 i번째 요소 꺼내기
-				tag+="<tr>";
-				tag +="<td>"+(i+1)+"</td>";
-				tag +="<td>"+json.title+"</td>"; //rest아니게 넣어줘야 디테일에서 비동기처럼 돌아감+노티스에 디테일 참조
-				tag +="<td>"+json.writer+"</td>";
-				tag +="<td>"+json.regdate+"</td>";
-				tag +="<td>"+json.hit+"</td>";
+				tag+="<tr class='text-center'>"
+				tag+="<td>"+(i+1)+"</td>";
+				tag+="<td class='col-6'><a href='/notice-detail?notice_id="+json.notice_id+"'>"+json.title+"</a></td>";
+				tag+="<td>"+json.writer+"</td>";
+				tag+="<td>"+json.regdate+"</td>";
 				tag+="</tr>";
+
+				
 			}
 			$("#dataList").append(tag);
 		}

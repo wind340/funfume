@@ -179,10 +179,6 @@
          </li>
 
          <li>
-            <a href="/cart" >Cart</a>
-         </li>
-
-         <li>
             <a href="/notice">Notice</a>
          </li>
 

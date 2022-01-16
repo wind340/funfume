@@ -69,7 +69,7 @@
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
-                  <thead>
+                  <thead >
                     <tr>
                       <th>No</th>
                       <th>제목</th>

@@ -26,6 +26,7 @@ import com.koreait.funfume.domain.Brand;
 import com.koreait.funfume.domain.Gender;
 import com.koreait.funfume.domain.Member;
 import com.koreait.funfume.domain.Note;
+import com.koreait.funfume.domain.Notice;
 import com.koreait.funfume.domain.Product;
 import com.koreait.funfume.domain.ProductAccord;
 import com.koreait.funfume.domain.ProductGender;
@@ -36,6 +37,7 @@ import com.koreait.funfume.model.brand.BrandService;
 import com.koreait.funfume.model.gender.GenderService;
 import com.koreait.funfume.model.member.MemberService;
 import com.koreait.funfume.model.note.NoteService;
+import com.koreait.funfume.model.notice.NoticeService;
 import com.koreait.funfume.model.product.ProductService;
 import com.koreait.funfume.model.productaccord.ProductAccordService;
 import com.koreait.funfume.model.productgender.ProductGenderService;
@@ -66,6 +68,9 @@ public class ShopController {
 	private ReviewService reviewService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private NoticeService noticeService;
+	
 	
 	@GetMapping("/")
 	public String getMain(HttpServletRequest request, Model model) {
@@ -158,10 +163,12 @@ public class ShopController {
 		return mav;
 	}
 	
-	//notice 한건 요청
-	@GetMapping("/noticedetail")
-	public ModelAndView getNoticeDetail() {
+	//Notice 한건 요청
+	@GetMapping("/notice-detail")
+	public ModelAndView getNoticeDetail(int notice_id) {
+		Notice notice = noticeService.select(notice_id);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("notice", notice);
 		mav.setViewName("shop/notice-detail");
 		return mav;
 	}
