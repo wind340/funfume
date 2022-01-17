@@ -20,6 +20,11 @@
 		update notice set title=#{title},writer=#{writer},content=#{content}
 		where notice_id=  #{notice_id}
 	</update>
+	
+	<!-- 조회수올리기 -->
+	<update id="plusHit" parameterType="int">
+		update notice set hit=hit+1 where notice_id=#{notice_id}
+	</update>
 
 	<delete id="delete" parameterType="int">
 		delete from notice where notice_id=#{notice_id}

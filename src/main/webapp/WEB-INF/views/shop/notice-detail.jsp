@@ -25,13 +25,13 @@ div#grid{
 div#grid2{
 	border-right: 1px solid #CCA63D;
 }
-div#content {
+textarea#content {
             width: 100%;
             height: 200px;
 			border-top: 1px solid #CCA63D;
 			border-bottom: 1px solid #CCA63D;
             box-sizing: border-box;
-            padding: 15px;
+            padding: 30px;
             font-size: 15px;
             resize: none;
  }
@@ -59,17 +59,18 @@ div#content {
 <form name="form1">
 	<div class="form-row">
 		<div class="col-md-6" id="grid2">
-			<label for="inputEmail4">작성자</label>
+			<label>작성자</label>
 			<p><%=notice.getWriter() %></p>
 		</div>
 	    <div class="col-md-6">
-			<label for="inputPassword4">작성일</label>
-			<p><%=notice.getRegdate()%></p>
+			<label>작성일</label>
+			<% String Regdate=notice.getRegdate();%>
+			<p><%=Regdate.substring(0,10)%></p>
 	    </div>
 		</div>
 		<div id="grid" class="form-group">
-			<label for="inputAddress">내용</label>
-			<div id="content"><%=notice.getContent() %></div>
+			<label class="text-left p-l-30 p-t-10"><%=notice.getTitle() %></label>
+			<textarea id="content" readonly><%=notice.getContent() %></textarea>
 		</div>
   		<button type="button" class="btn btn-dark" onClick="history.back()">돌아가기</button>
 	</form>

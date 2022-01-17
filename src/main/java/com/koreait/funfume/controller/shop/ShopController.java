@@ -166,6 +166,7 @@ public class ShopController {
 	//Notice 한건 요청
 	@GetMapping("/notice-detail")
 	public ModelAndView getNoticeDetail(int notice_id) {
+		noticeService.plusHit(notice_id);
 		Notice notice = noticeService.select(notice_id);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("notice", notice);

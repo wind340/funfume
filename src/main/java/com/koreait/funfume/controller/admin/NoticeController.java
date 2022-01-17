@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.funfume.domain.Notice;
+import com.koreait.funfume.exception.NoteTypeException;
+import com.koreait.funfume.exception.NoticeException;
 import com.koreait.funfume.model.notice.NoticeService;
 @Controller
 public class NoticeController {
@@ -39,11 +42,17 @@ public class NoticeController {
 	
 	//상세보기 요청처리
 	@GetMapping("notice/detail")
-	public ModelAndView getDetail(HttpServletRequest request,@RequestParam(name = "notice_id",defaultValue = "0")int notice_id) {
+	public ModelAndView getDetail(HttpServletRequest request,@RequestParam(name = "notice_id", defaultValue = "0")int notice_id) {
 		Notice notice = noticeService.select(notice_id);
 		ModelAndView mav = new ModelAndView("admin/notice/detail");
 		mav.addObject("notice", notice);
-		
+		return mav;
+	}
+	
+	@ExceptionHandler(NoticeException.class)
+	public ModelAndView handle(NoticeException e) {
+		ModelAndView mav = new ModelAndView("admin/error/result");
+		mav.addObject("e", e);
 		return mav;
 	}
 }

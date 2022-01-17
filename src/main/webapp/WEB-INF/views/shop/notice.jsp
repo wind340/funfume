@@ -61,6 +61,7 @@ th {
                       <th>No</th>
                       <th class="col-6">제목</th>
                       <th>작성자</th>
+                      <th>조회수</th>
                       <th>등록일</th>
                     </tr>
                   </thead>
@@ -100,7 +101,9 @@ function getList(){
 				tag+="<td>"+(i+1)+"</td>";
 				tag+="<td class='col-6'><a href='/notice-detail?notice_id="+json.notice_id+"'>"+json.title+"</a></td>";
 				tag+="<td>"+json.writer+"</td>";
-				tag+="<td>"+json.regdate+"</td>";
+				tag+="<td>"+json.hit+"</td>";
+				var regdate=json.regdate;
+				tag+="<td>"+regdate.substring(0,10)+"</td>";
 				tag+="</tr>";
 
 				

@@ -58,4 +58,12 @@ public class MybatisNoticeDAO implements NoticeDAO {
 		}		
 	}
 
+	@Override
+	public void plusHit(int notice_id) throws NoticeException {
+		int result = sessionTemplate.update("Notice.plusHit", notice_id);
+		if(result==0) {
+			throw new NoticeException("게시물 삭제 실패");
+		}	
+	}
+
 }

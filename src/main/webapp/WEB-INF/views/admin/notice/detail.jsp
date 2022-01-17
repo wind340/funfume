@@ -8,7 +8,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Noticeboard</title>
+  <title>Funfume | notice</title>
 	
 	<%@ include file="../../admin_inc/head_link.jsp" %>
   <!-- summernote -->
@@ -75,7 +75,7 @@
                     <input type="text" class="form-control" value="<%=notice.getWriter() %>" name="writer">
                   </div>
                   <div class="form-group">
-                    <textarea class="form-control" name="content" ><%=notice.getContent() %></textarea>
+                    <textarea class="form-control" rows="15" name="content" ><%=notice.getContent() %></textarea>
                   </div>
      
                 <!-- /.card-body -->
@@ -142,6 +142,14 @@ $(function () {
 
 function edit(){
 	 //비동기방식으로 글수정 요청을 시도하자!!
+		if($("input[name='title']").val()==""){
+			alert("제목 입력은 필수입니다");
+			return;	
+		}
+		if($("input[name='writer']").val()==""){
+			alert("작성자 입력은 필수입니다");
+			return;
+		}
 	 $.ajax({
 		 url:"/admin/rest/notice",
 		 type:"post",

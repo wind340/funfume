@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Noticeboard</title>
+  <title>Funfume | notice</title>
 	
 	<%@ include file="../../admin_inc/head_link.jsp" %>
 </head>
@@ -65,7 +65,7 @@
                     <input type="text" class="form-control" placeholder="작성자.." name="writer">
                   </div>
                   <div class="form-group">
-                    <textarea class="form-control" name="content"></textarea>
+                    <textarea class="form-control" rows="15" name="content"></textarea>
                   </div>
      
                 <!-- /.card-body -->
@@ -123,14 +123,14 @@ $(function () {
 
 function regist(){
 	 //비동기방식으로 글등록 요청을 시도하자!!
-		if($("input[name='title']").val()==""){
-			alert("제목 입력은 필수입니다");
-			return;	
-		}
-		if($("input[name='writer']").val()==""){
-			alert("작성자 입력은 필수입니다");
-			return;
-		}
+	if($("input[name='title']").val()==""){
+		alert("제목 입력은 필수입니다");
+		return;	
+	}
+	if($("input[name='writer']").val()==""){
+		alert("작성자 입력은 필수입니다");
+		return;
+	}
 	 $.ajax({
 		 url:"/admin/notice/regist",
 		 type:"post",

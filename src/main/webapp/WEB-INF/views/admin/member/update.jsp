@@ -5,11 +5,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>AdminLTE 3 | Dashboard</title>
-	<%
+<meta charset="utf-8">
+<title>Funfume | member</title>
+<%
 	Member member = (Member)request.getAttribute("member");
-	%>
+%>
 	<%@ include file="../../admin_inc/head_link.jsp" %>
   
 </head>

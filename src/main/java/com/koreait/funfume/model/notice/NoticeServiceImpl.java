@@ -49,4 +49,9 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDAO.delete(notice_id);
 	}
 
+	@Override
+	public void plusHit(int notice_id) throws NoticeException{
+		noticeDAO.plusHit(notice_id);
+	}
+
 }

@@ -16,4 +16,5 @@ public interface NoticeDAO {
 	public void insert(Notice notice);
 	public void update(Notice notice);
 	public void delete(int notice_id);
+	public void plusHit(int notice_id);
 }
