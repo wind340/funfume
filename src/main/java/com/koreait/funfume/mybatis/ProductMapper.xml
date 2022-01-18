@@ -24,6 +24,11 @@
 	select * from product where gender_id=#{gender_id} order by product_id desc
 </select>
 
+<!-- 총 제품 -->
+<select id="countProduct" resultType="int">
+	select count(*) from product
+</select>	
+
 <insert id="insert" parameterType="Product">
 	insert into product(brand_id, gender_id, product_name, price, introduction)
 	values(#{brand_id},#{gender_id},#{product_name},#{price},#{introduction})

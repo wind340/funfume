@@ -55,5 +55,10 @@ public class MybatisProductDAO implements ProductDAO {
 		return sessionTemplate.selectList("Product.selectGender", gender_id);
 	}
 
+	@Override
+	public int countProduct() {
+		return sessionTemplate.selectOne("Product.countProduct");
+	}
+
 
 }

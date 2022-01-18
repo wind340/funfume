@@ -9,4 +9,5 @@ public interface OrderSummaryService {
 	public List adminSelectAll();
 	public List selectAll(int member_id);
 	public void regist(OrderSummary ordersummary);
+	public int countOrder();
 }

@@ -20,6 +20,12 @@
 	select * from member where pass=#{pass}
 </select>
 
+<!-- count 가져오기 -->
+<select id="countMember" resultType="int">
+	select count(*) from member
+</select>	
+	
+
 <insert id="join" parameterType="Member">
 	insert into member(member_name, email, pass, addr1, addr2)
 	values(#{member_name},#{email},#{pass},#{addr1},#{addr2})

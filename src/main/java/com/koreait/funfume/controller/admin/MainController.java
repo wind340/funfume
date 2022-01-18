@@ -3,6 +3,7 @@
  */
 package com.koreait.funfume.controller.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.w3c.dom.css.Counter;
 
 import com.koreait.funfume.domain.OrderDetail;
 import com.koreait.funfume.domain.OrderSummary;
+import com.koreait.funfume.model.member.MemberService;
 import com.koreait.funfume.model.orderdetail.OrderDetailService;
 import com.koreait.funfume.model.ordersummary.OrderSummaryService;
 import com.koreait.funfume.model.product.ProductService;
@@ -35,18 +38,21 @@ public class MainController {
 	private Pager pager;
 	
 	@Autowired
+	private MemberService memberService;
+		
+	@Autowired
 	private OrderDetailService orderDetailService;
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public ModelAndView getMain(HttpServletRequest request) {
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("admin/index");
-		//System.out.println(productService);
-		
-		return mav;
+	public String getMain(HttpServletRequest request, Model model) {
+		int countOrder=orderSummaryService.countOrder();
+		int countProduct=productService.countProduct();
+		int countMember=memberService.countMember();
+		model.addAttribute("countOrder", countOrder);
+		model.addAttribute("countProduct", countProduct);
+		model.addAttribute("countMember", countMember);
+		return "admin/index";
 	}
-	
 	
 	//주문내역 리스트페이지
 	@GetMapping("/order/list")

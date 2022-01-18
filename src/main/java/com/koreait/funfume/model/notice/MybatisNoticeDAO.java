@@ -15,12 +15,10 @@ import com.koreait.funfume.exception.NoticeException;
 
 /**
  * @author easyd
- *
  */
 @Repository
 public class MybatisNoticeDAO implements NoticeDAO {
 	
-
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	

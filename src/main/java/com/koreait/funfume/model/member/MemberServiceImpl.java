@@ -45,6 +45,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.select(member_id);
 	}
 
+	@Override
+	public int countMember() {
+		return memberDAO.countMember();
+	}
+
 //	@Override
 //	public Member passCheck(String pass) {
 //		return memberDAO.passCheck(pass);

@@ -32,4 +32,9 @@ public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 	public List adminSelectAll() {
 		return sessionTemplate.selectList("OrderSummary.adminSelectAll");
 	}
+
+	@Override
+	public int countOrder() {
+		return sessionTemplate.selectOne("OrderSummary.countOrder");
+	}
 }

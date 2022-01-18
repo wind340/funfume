@@ -17,4 +17,5 @@ public interface MemberService {
 	public void join(Member member); //insert
 	public void update(Member member);
 	public void delete(int member_id);
+	public int countMember();
 }

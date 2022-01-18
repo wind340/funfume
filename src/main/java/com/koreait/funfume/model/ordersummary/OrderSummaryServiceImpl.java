@@ -41,4 +41,9 @@ public class OrderSummaryServiceImpl implements OrderSummaryService {
 	public List adminSelectAll() {
 		return orderSummaryDAO.adminSelectAll();
 	}
+
+	@Override
+	public int countOrder() {
+		return orderSummaryDAO.countOrder();
+	}
 }

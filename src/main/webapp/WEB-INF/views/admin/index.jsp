@@ -1,4 +1,10 @@
+<%
+	int countOrder = (Integer)request.getAttribute("countOrder");
+	int countProduct = (Integer)request.getAttribute("countProduct");
+	int countMember = (Integer)request.getAttribute("countMember");	
+%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,14 +59,14 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>오더 리스트cnt</h3>
+                <h3><%=countOrder%></h3>
 
-                <p>New Orders</p>
+                <p>Total Orders</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="/admin/member/list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/admin/order/list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -68,7 +74,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>등록된 상품cnt</sup></h3>
+                <h3><%=countProduct %><sup style="font-size: 20px">ea</sup></h3>
 
                 <p>Total Product</p>
               </div>
@@ -83,7 +89,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>총 유저</h3>
+                <h3><%=countMember %></h3>
 
                 <p>User Registrations</p>
               </div>

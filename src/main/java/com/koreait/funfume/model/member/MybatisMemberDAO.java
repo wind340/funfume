@@ -60,6 +60,11 @@ public class MybatisMemberDAO implements MemberDAO{
 		return result;
 	}
 
+	@Override
+	public int countMember() {
+		return sessionTemplate.selectOne("Member.countMember");
+	}
+
 
 //	@Override
 //	public Member passCheck(String pass) throws MemberException{

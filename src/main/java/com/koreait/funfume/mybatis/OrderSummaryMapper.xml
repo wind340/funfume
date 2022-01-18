@@ -27,6 +27,10 @@
 			and os.member_id=#{member_id} order by orderdate desc
 	</select>
 	
+	<!-- count 가져오기 -->
+	<select id="countOrder" resultType="int">
+		select count(*) from order_summary
+	</select>	
 		
 	<insert id="insert" parameterType="OrderSummary">
 		insert into order_summary(member_id, paymethod_id, totalpay)
