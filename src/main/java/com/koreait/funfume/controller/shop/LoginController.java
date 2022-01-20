@@ -1,5 +1,8 @@
 package com.koreait.funfume.controller.shop;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,11 +11,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.koreait.funfume.domain.Member;
 import com.koreait.funfume.exception.MemberException;
@@ -84,35 +92,26 @@ public class LoginController {
 		ResponseEntity<Message> entity = new ResponseEntity(message, HttpStatus.OK);
 		return entity;
 	}
-
-	// 회원가입 폼 요청
-	@GetMapping("/joinForm")
-	public String MemberForm() {
-		return "shop/join";
-	}
-
-	@PostMapping("/join")
-	public String join(HttpServletRequest request, Member member) {
-		System.out.println(member.getAddr1());
-		memberService.join(member);
-		return "redirect:/sign-in-form";
+	
+	@GetMapping("/join")
+	public ModelAndView getJoin() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shop/join");
+		return mav;
 	}
 
 	// 가입회원 비밀번호 암호화
-	/*
-	 * @PostMapping("/join") public String join(Member member, HttpServletRequest
-	 * request) throws Exception{ request.setCharacterEncoding("utf-8");
-	 * request.getParameter("utf-8"); System.out.println(member.getAddr1());
-	 * System.out.println(member.getAddr2()); String
-	 * pass=hashBuilder.convertStringToHash(member.getPass()); member.setPass(pass);
-	 * 
-	 * 
-	 * memberService.join(member);
-	 * 
-	 * return "redirect:/sign-in-form";
-	 * 
-	 * }
-	 */
+	@PostMapping("/join")
+	public String join(Member member, HttpServletRequest request) {
+	 System.out.println(member.getAddr1());
+	 System.out.println(member.getAddr2()); String
+	 pass=hashBuilder.convertStringToHash(member.getPass()); member.setPass(pass);
+	 memberService.insert(member);
+	 
+	 return "redirect:/sign-in-form"; 
+	 }
+	 
+	
 	// 회원가입시 이메일 중복체크
 	@PostMapping("/emailCheck")
 	@ResponseBody
