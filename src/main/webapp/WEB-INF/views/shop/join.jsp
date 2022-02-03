@@ -42,11 +42,11 @@
 						<div class="bor8 m-b-10 how-pos4-parent" >
 							<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="email" name="email" required placeholder="이메일을 입력하세요">
 						</div>
- 						<button type="button" id="mailCheck" class="flex-c-m stext-101 cl0 size-121 m-b-20 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">이메일 중복검사</button>
+ 						<button type="button" id="mailCheck" class="flex-c-m stext-101 cl0 size-121 m-b-20 bg5 bor1 hov-btn3 p-lr-15 trans-04 pointer">이메일 중복검사</button>
 						<div class="bor8 m-b-20 how-pos4-parent">
 							<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="password" name="pass" required placeholder="비밀번호를 입력하세요">
 						</div>
-								<button type="button" onClick="goPopup()" class="flex-c-m stext-50 cl0 size-121 m-b-20 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">주소찾기</button>
+								<button type="button" onClick="goPopup()" class="flex-c-m stext-50 cl0 size-121 m-b-20 bg5 bor1 hov-btn3 p-lr-15 trans-04 pointer">주소찾기</button>
 						<div class="bor8 m-b-20 how-pos4-parent">
 								<input class="stext-111 size-116 p-l-30 p-r-30" type="text"  id="addr1" name="addr1" required placeholder="주소찾기를 이용해 입력하세요" readonly="readonly">
 						</div>
@@ -134,7 +134,6 @@ function goPopup() {
 
 
 function join(){
-	
 	var name = $("input[name='member_name']").val();
 	var email = $("input[name='email']").val();
 	var pass = $("input[name='pass']").val();
@@ -152,7 +151,6 @@ function join(){
 	}else if(addr2==""){
 		alert("상세 주소를 입력해주세요");
 	}else{
-	
 		$("form[name='form1']").attr({
 			action:"/join",
 			method:"post"
@@ -160,13 +158,15 @@ function join(){
 			
 		$("form[name='form1']").submit();
 		alert("회원가입이 완료되었습니다. 로그인해주세요");
-	
 	}
 }
 
 function checkMail(){
 	var email = $("input[name='email']").val();
-	
+	if(email=="") {
+		alert("email을 입력해주세요");
+		return;
+	}
 	$.ajax({
 		url:'/emailCheck',
 		type:'post',
