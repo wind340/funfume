@@ -55,4 +55,9 @@ public class MybatisNoteDAO implements NoteDAO{
 		return sessionTemplate.selectList("Note.selectType", note_type_id);
 	}
 
+	@Override
+	public List search(String keyword) {
+		return sessionTemplate.selectList("Note.search", keyword);
+	}
+
 }

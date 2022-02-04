@@ -45,5 +45,10 @@ public class NoteServiceImpl implements NoteService{
 		return noteDAO.selectType(note_type_id);
 	}
 
+	@Override
+	public List search(String keyword) {
+		return noteDAO.search(keyword);
+	}
+
 	
 }

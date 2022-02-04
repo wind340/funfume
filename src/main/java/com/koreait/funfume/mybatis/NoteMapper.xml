@@ -35,6 +35,15 @@
 		and n.note_type_id=#{note_type_id}
 	</select>
 	
+	<!-- 노트search -->
+	<select id="search" parameterType="String" resultMap="JoinNoteTypeNote">
+		<include refid="selectAllNote"/>
+		<![CDATA[
+		and note_name like concat('%','#{keyword}','%')
+		]]>
+	</select>
+	
+	
 	<!-- 노트 등록 -->
 	<insert id="insert" parameterType="Note">
 		insert into note(note_type_id, note_name, note_img) values(#{noteType.note_type_id}, #{note_name}, #{note_img})

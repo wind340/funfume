@@ -13,5 +13,5 @@ public interface NoteService {
 	public void insert(Note note);
 	public void update(Note note);
 	public void delete(int note_id);
-
+	public List search(String keyword);
 }
