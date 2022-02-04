@@ -3,6 +3,7 @@
  */
 package com.koreait.funfume.controller.shop;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +16,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.koreait.funfume.domain.Accord;
 import com.koreait.funfume.domain.Brand;
 import com.koreait.funfume.domain.Gender;
@@ -44,6 +48,7 @@ import com.koreait.funfume.model.productgender.ProductGenderService;
 import com.koreait.funfume.model.productnote.ProductNoteService;
 import com.koreait.funfume.model.review.ReviewService;
 import com.koreait.funfume.util.Message;
+import com.mysql.cj.xdevapi.JsonArray;
 
 @Controller
 public class ShopController {
@@ -70,8 +75,7 @@ public class ShopController {
 	private MemberService memberService;
 	@Autowired
 	private NoticeService noticeService;
-	
-	
+
 	@GetMapping("/")
 	public String getMain(HttpServletRequest request, Model model) {
 		List<Product> productList = productService.selectAll();
@@ -163,10 +167,10 @@ public class ShopController {
 		return mav;
 	}
 	
-	//Notice 한건 요청
+	//Notice 한건 요청 
 	@GetMapping("/notice-detail")
 	public ModelAndView getNoticeDetail(int notice_id) {
-		noticeService.plusHit(notice_id);
+		noticeService.plusHit(notice_id);	//페이지 볼때마다 조회수+1
 		Notice notice = noticeService.select(notice_id);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("notice", notice);
@@ -228,5 +232,11 @@ public class ShopController {
 	}
 	
 	
-	
+	@RequestMapping(value="/search", method = RequestMethod.GET)
+	@ResponseBody
+	public List getSearch(@PathVariable(name = "keyword") String keyword) {
+		List<Note> noteList = noteService.search(keyword);
+		return noteList;
+	}
+
 }
