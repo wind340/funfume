@@ -138,11 +138,11 @@ input[type="email"]:focus {
    </form>
 
    <!-- Footer -->
-   <%@ include file="../shop_inc/footer.jsp"%>
+<%@ include file="../shop_inc/footer.jsp"%>
    <!-- Back to top -->
-   <%@ include file="../shop_inc/back_to_top.jsp"%>
+<%@ include file="../shop_inc/back_to_top.jsp"%>
    <!-- Bottom_link -->
-   <%@ include file="../shop_inc/bottom_link.jsp"%>
+<%@ include file="../shop_inc/bottom_link.jsp"%>
 
 <script type="text/javascript">
    function culc() {
