@@ -106,7 +106,7 @@ public class LoginController {
 	 System.out.println(member.getAddr1());
 	 System.out.println(member.getAddr2()); String
 	 pass=hashBuilder.convertStringToHash(member.getPass()); member.setPass(pass);
-	 memberService.insert(member);
+	 memberService.signIn(member);
 	 
 	 return "redirect:/sign-in-form"; 
 	 }

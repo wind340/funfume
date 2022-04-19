@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.w3c.dom.css.Counter;
+
 
 import com.koreait.funfume.domain.OrderDetail;
 import com.koreait.funfume.domain.OrderSummary;
@@ -63,7 +63,8 @@ public class MainController {
 		model.addAttribute("pager", pager);
 	return "admin/order/list";
 	}
-
+	
+	
 	//주문디테일가져오기
 	@GetMapping("/order/detail")
 	public String getOrderDetail(Model model, int order_summary_id) {

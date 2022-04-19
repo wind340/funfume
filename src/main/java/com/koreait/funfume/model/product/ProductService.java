@@ -15,5 +15,6 @@ public interface ProductService {
 	public void update(Product product,List<ProductImg> productImgList);
 	public void delete(int product_id);
 	public int countProduct();
+	public List searchKeyword(String keyword);
 	
 }

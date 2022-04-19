@@ -37,8 +37,12 @@
 			<!-- select seq_product.currval as product_id from dual -->
 			select last_insert_id() as product_id 
 		</selectKey>
-
 </insert>
+
+<select id="searchKeyword" parameterType="String" resultMap="JoinProductProdictImg">
+	select * from product where product_name like concat('%',#{keyword},'%')
+</select>
+
 
 <update id="update"  parameterType="Product">
 	update product set brand_id=#{brand_id},gender_id=#{gender_id},product_name=#{product_name},price=#{price},

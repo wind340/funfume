@@ -232,11 +232,11 @@ public class ShopController {
 	}
 	
 	
-	@RequestMapping(value="/search", method = RequestMethod.GET)
-	@ResponseBody
-	public List getSearch(@PathVariable(name = "keyword") String keyword) {
-		List<Note> noteList = noteService.search(keyword);
-		return noteList;
+	@GetMapping("/search")
+	public String getSearch(String keyword, Model model) {
+		List<Product> searchList = productService.searchKeyword(keyword);
+		model.addAttribute("searchList", searchList);
+		return "shop/search";
 	}
 
 }

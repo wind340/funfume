@@ -121,4 +121,9 @@ public class ProductServiceImpl implements ProductService {
 	public int countProduct() {
 		return productDAO.countProduct();
 	}
+
+	@Override
+	public List searchKeyword(String keyword) {
+		return productDAO.searchKeyword(keyword);
+	}
 }

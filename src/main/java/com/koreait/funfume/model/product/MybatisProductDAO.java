@@ -60,5 +60,9 @@ public class MybatisProductDAO implements ProductDAO {
 		return sessionTemplate.selectOne("Product.countProduct");
 	}
 
+	@Override
+	public List searchKeyword(String keyword) throws ProductException {
+		return sessionTemplate.selectList("Product.searchKeyword", keyword);
+	}
 
 }

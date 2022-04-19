@@ -23,5 +23,6 @@ public interface ProductDAO {
 	public void update(Product product);
 	public void delete(int product_id);
 	public int countProduct();
+	public List searchKeyword(String keyword);
 
 }

@@ -17,7 +17,7 @@
 	<jee:jndi-lookup 
 	id="dataSource" 
 	resource-ref="true"
-	jndi-name="java:comp/env/jdbc/mysql"/>
+	jndi-name="jdbc/funfume"/>
 	
 	<!-- 사용하려는 persistence 관련 기술(Mybatis,jdbc,hibernate, JSA...)에 따라 -->
 	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
