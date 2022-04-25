@@ -28,8 +28,7 @@ MySql 8.0
 ## 🧮 ADMIN PAGE
 <img src="https://user-images.githubusercontent.com/83698052/155143024-efd7e1bf-5757-4cda-8c8c-14bd317fe949.png" width="80%" height="80%">
 
-관리자 페이지를 보고 싶으신 분은
-allyace34@gmail.com으로 연락주시면 감사하겠습니다.
+http://easydong02.cafe24.com/admin/main
 
 ## 💼 ERD
 <img src="https://user-images.githubusercontent.com/83698052/155143868-30c05457-eb5c-4d4e-bbde-f2c3be09db94.png" width="80%" height="80%">
